@@ -9,12 +9,13 @@
 body {
   background-image: url(./assets/bg.jpg);
   background-size: cover;
+  background-position: left;
   padding: 3%, 5%;
   font-family: "Outfit", sans-serif;
 }
 
 .bigContainer {
-  padding-left: 10%;
+  padding-left: 20%;
 }
 header {
   margin: 5%;
@@ -44,13 +45,16 @@ h1 {
 .paragraph {
   font-size: 1rem;
   color: #e7e7eb;
-  margin-bottom: 2%;
+  margin-bottom: 4%;
+  font-weight: 300;
+  line-height: normal;
 }
 ul {
   font-size: 1rem;
   color: #e7e7eb;
   margin-bottom: 2%;
-  padding-left: 2%;
+  padding-left: 2.5%;
+  font-weight: 300;
 }
 li {
   margin-right: 2%;
@@ -65,8 +69,8 @@ li strong {
   font-weight: bold;
 }
 .checkbox {
+  border: 3px solid #e7e7eb;
   background-color: #0b113b;
-  border: 2px solid #e7e7eb;
 }
 #ProceedButton {
   margin-left: 30%;
