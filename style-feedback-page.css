@@ -1,0 +1,15 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(./assets/bg.jpg);
+  background-size: cover;
+  padding: 3% 5%;
+}
+
+#logo {
+  width: 10rem;
+}
