@@ -16,6 +16,7 @@ body {
 
 header {
   margin: 5%;
+  padding-inline: 14%;
 }
 
 #Logo {
@@ -31,10 +32,12 @@ header {
   color: #e7e7eb;
   text-align: center;
   padding: 1%;
+  text-transform: uppercase;
+  font-size: 0.5rem;
 }
 
 .spanTimer {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   padding: 1%;
 }
 
@@ -59,7 +62,7 @@ h1 {
   border: 1px solid #e7e7eb;
   box-shadow: 0px 0px 0px 0px #e7e7eb;
   border-radius: 50px;
-  background: linear-gradient(to right, #2b2956, #312a5a, #3d2a67, #5a2076);
+  background-color: transparent;
   text-align: center;
   font-family: "Outfit", sans-serif;
   font-weight: 300;
@@ -74,20 +77,6 @@ h1 {
   border: 1px solid #e7e7eb;
   box-shadow: 0px 0px 0px 0px #e7e7eb;
   border-radius: 50px;
-  text-align: center;
-  font-family: "Outfit", sans-serif;
-  font-weight: 300;
-  font-size: 1em;
-  color: #e7e7eb;
-  width: 18rem;
-  height: 4rem;
-  margin: 1%;
-}
-.answerButton4 {
-  border: 1px solid #e7e7eb;
-  box-shadow: 0px 0px 0px 0px #e7e7eb;
-  border-radius: 50px;
-  background: linear-gradient(to right, #5a317a, #69367e, #5a2076);
   text-align: center;
   font-family: "Outfit", sans-serif;
   font-weight: 300;
