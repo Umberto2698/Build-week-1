@@ -31,7 +31,8 @@ main {
 h1 {
   color: #e7e7eb;
   font-size: 4rem;
-  margin-bottom: 2%;
+  margin-bottom: 4%;
+  line-height: 75%;
 }
 .titleBoldText {
   font-weight: bold;
@@ -73,7 +74,7 @@ li strong {
   background-color: #0b113b;
 }
 #ProceedButton {
-  margin-left: 30%;
+  margin-left: 16%;
   background-color: #00ffff;
   text-align: center;
   font-family: "Outfit", sans-serif;
