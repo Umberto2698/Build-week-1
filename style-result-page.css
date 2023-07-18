@@ -78,12 +78,15 @@ main > div:nth-child(4) {
 
 #chart {
   font-family: "Outfit", sans-serif;
-  border: 1px solid white;
+  border: 1px solid transparent;
   border-radius: 50%;
   width: 20em;
   height: 20em;
-  margin-left: 10%;
-  margin-top: 9%;
+  margin-left: 10.7%;
+  margin-top: 9.7%;
+  background-image: url(./assets/bg.jpg);
+  background-size: 1250px;
+  background-position: 749px;
 }
 
 main > div > div > p:first-child {
