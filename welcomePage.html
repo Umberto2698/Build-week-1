@@ -29,11 +29,12 @@
           <li>This exam will take approx. <strong>0-5 minutes.</strong></li>
         </ul>
         <div class="container">
-          <input class="checkbox" type="checkbox" />
+          <input id="checkProceed" class="checkbox" type="checkbox" />
           <label for="checkbox">I promise to answer myself without help from anyone</label>
-          <button id="ProceedButton">PROCEED</button>
+          <button id="ProceedButton" onclick="goToQuizPage(event)">PROCEED</button>
         </div>
       </main>
     </div>
+    <script src="welcomePage.js"></script>
   </body>
 </html>
