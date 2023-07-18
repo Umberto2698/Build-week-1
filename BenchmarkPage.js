@@ -85,26 +85,6 @@ const questions = [
 /*Ho ricreato la pagina con JS*/
 let questionNumber = 0;
 
-const body = document.getElementsByTagName("body")[0];
-const main = document.getElementsByTagName("main")[0];
-const question = document.createElement("div");
-question.innerHTML = `<h1>${questions[0].question}</h1>
-<form id="formAnswer" onsubmit="nextQuestion(event)" >
-  <button class="answerButton" type="submit">${questions[0].incorrect_answers[0]}</button>
-  <button class="answerButton" type="submit">${questions[0].correct_answer}</button>
-  <br />
-  <button class="answerButton" type="submit">${questions[0].incorrect_answers[1]}</button>
-  <button class="answerButton" type="submit">${questions[0].incorrect_answers[2]}</button>
-</form>`;
-main.appendChild(question);
-
-const footer = document.getElementsByTagName("footer")[0];
-const numberQuestion = document.createElement("p");
-numberQuestion.classList.add("footerParagraph");
-numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
-footer.appendChild(numberQuestion);
-body.appendChild(footer);
-
 let indiciIncorrectAnswers = [];
 let randomIndex = () => {
   for (let i = 0; i < 3; i++) {
@@ -133,20 +113,35 @@ let randomPosition = () => {
   }
 };
 
+let buttons = [];
 const nextQuestion = (submitEvent) => {
   submitEvent.preventDefault();
   if (questionNumber === questions.length) {
     //Andare alla pagina risultati
   } else {
+    console.log(submitEvent);
     questionNumber++;
     main.innerHTML = "";
     question.innerHTML = "";
-    const buttons = [];
     const h1 = document.createElement("h1");
     h1.innerText = `${questions[questionNumber].question}`;
+    const form = document.createElement("form");
+    form.id = "formAnswer";
+    form.addEventListener("click", (clicco) => {
+      clicco.preventDefault();
+      console.log(1);
+      //Domani vedere da qui
+      for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
+        if (clicco.currentTarget.childNodes[i].type !== undefined) {
+          console.log(clicco.currentTarget.childNodes[i].type);
+        }
+      }
+      clicco.target.id = "selectedButton";
+      console.log(clicco.target);
+    });
     for (let i = 0; i < 4; i++) {
       const button = document.createElement("button");
-      button.classList.add("answerButton");
+      button.id = "answerButton";
       button.style.type = "submit";
       buttons.push(button);
       randomPosition();
@@ -160,15 +155,19 @@ const nextQuestion = (submitEvent) => {
         buttons[i].innerText = `${questions[questionNumber].correct_answer}`;
       }
     }
-    question.innerHTML = `<h1>${questions[questionNumber].question}</h1>
-             <form id="formAnswer" onsubmit="nextQuestion(event)">
-             <button class="answerButton" type="submit">${buttons[0].innerText}</button>
-             <button class="answerButton" type="submit">${buttons[1].innerText}</button>
-             <br />
-             <button class="answerButton" type="submit">${buttons[2].innerText}</button>
-             <button class="answerButton" type="submit">${buttons[3].innerText}</button>
-         </form>`;
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    form.appendChild(br);
+    form.appendChild(buttons[2]);
+    form.appendChild(buttons[3]);
+    question.appendChild(h1);
+    question.appendChild(form);
     main.appendChild(question);
+    const next = document.createElement("button");
+    next.id = "answerButton";
+    next.innerText = "Next question";
+    next.onclick = nextQuestion;
+    main.appendChild(next);
     footer.innerHTML = "";
     numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
     footer.appendChild(numberQuestion);
@@ -176,4 +175,36 @@ const nextQuestion = (submitEvent) => {
   }
   indici = [];
   indiciIncorrectAnswers = [];
+  buttons = [];
 };
+
+const clicked = (clicco) => {
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].id = "answerButton ";
+  }
+  clicco.target.id = "selectedButton";
+};
+
+const next = document.getElementById("answerButton");
+next.onclick = nextQuestion;
+const br = document.createElement("br");
+const body = document.getElementsByTagName("body")[0];
+const main = document.getElementsByTagName("main")[0];
+const question = document.createElement("div");
+question.innerHTML = `<h1>${questions[0].question}</h1>
+<form id="formAnswer" >
+<button id="answerButton" >${questions[0].incorrect_answers[0]}</button>
+<button id="answerButton" >${questions[0].correct_answer}</button>
+<br />
+<button id="answerButton" >${questions[0].incorrect_answers[1]}</button>
+<button id="answerButton" >${questions[0].incorrect_answers[2]}</button>
+</form>`;
+main.appendChild(question);
+main.appendChild(next);
+
+const footer = document.getElementsByTagName("footer")[0];
+const numberQuestion = document.createElement("p");
+numberQuestion.classList.add("footerParagraph");
+numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
+footer.appendChild(numberQuestion);
+body.appendChild(footer);
