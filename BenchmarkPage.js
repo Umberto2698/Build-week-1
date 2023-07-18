@@ -135,37 +135,25 @@ let randomPosition = () => {
 
 const nextQuestion = (submitEvent) => {
   submitEvent.preventDefault();
-  console.log(1);
   if (questionNumber === questions.length) {
     //Andare alla pagina risultati
   } else {
     questionNumber++;
     main.innerHTML = "";
     question.innerHTML = "";
+    const buttons = [];
     const h1 = document.createElement("h1");
     h1.innerText = `${questions[questionNumber].question}`;
-    const button1 = document.createElement("button");
-    button1.classList.add("answerButton");
-    button1.style.type = "submit";
-    const button2 = document.createElement("button");
-    button2.classList.add("answerButton");
-    button2.style.type = "submit";
-    const button3 = document.createElement("button");
-    button3.classList.add("answerButton");
-    button3.style.type = "submit";
-    const button4 = document.createElement("button");
-    button4.classList.add("answerButton");
-    button4.style.type = "submit";
-    const buttons = [button1, button2, button3, button4];
-    for (let i = 0; i < buttons.length; i++) {
-      console.log(buttons[i].innerText === "");
+    for (let i = 0; i < 4; i++) {
+      const button = document.createElement("button");
+      button.classList.add("answerButton");
+      button.style.type = "submit";
+      buttons.push(button);
+      randomPosition();
     }
-    for (let i = 0; i < buttons.length; i++) {
+    for (let i = 0; i < 3; i++) {
       let index = randomIndex();
-      console.log(index);
-      let position = randomPosition();
-      console.log(position);
-      console.log((buttons[position].innerText = `${questions[questionNumber].incorrect_answers[index]}`));
+      buttons[indici[i]].innerText = `${questions[questionNumber].incorrect_answers[index]}`;
     }
     for (let i = 0; i < buttons.length; i++) {
       if (buttons[i].innerText === "") {
