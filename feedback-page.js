@@ -10,3 +10,24 @@ for (let i = 0; i < Stars.length; i++) {
     }
   });
 }
+/*
+if ((clickedstar.target.currentSrc = ".http://127.0.0.1:5500/assets/starafterclick.svg")) {
+  console.log(clickedstar.target.currentSrc);
+  clickedstar.target.currentSrc = "http://127.0.0.1:5500/assets/star.svg";
+}
+const text = document.getElementsByTagName("input");
+let keyCounter = 0;
+text.innertText = "";
+text[0].addEventListener("keyup", (key) => {
+  console.log(key);
+  if (key.code === "Backspace") {
+    keyCounter--;
+    text.innertText = text.innertText.slice(0, -1);
+    console.log(text.innertText);
+  } else {
+    if (key.shiftKey === true) {
+      text.innertText += "";
+    }
+  }
+  console.log(keyCounter);
+});*/

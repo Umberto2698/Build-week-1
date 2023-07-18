@@ -57,10 +57,10 @@ input {
   margin-top: 1%;
   padding-left: 2%;
   height: 3em;
-}
-
-input::placeholder {
-  font-size: 1.5em;
+  color: white;
+  font-size: 1.2em;
+  size: auto;
+  outline: none;
 }
 
 button {
