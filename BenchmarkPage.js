@@ -83,34 +83,109 @@ const questions = [
 ];
 
 /*Ho ricreato la pagina con JS*/
+let questionNumber = 0;
+
 const body = document.getElementsByTagName("body")[0];
 const main = document.getElementsByTagName("main")[0];
-const question1 = document.createElement("div");
-question1.innerHTML = `<h1>${questions[0].question}</h1>
-<form id="formAnswer">
-  <button class="answerButton">${questions[0].incorrect_answers[0]}</button>
-  <button id="selectedButton">${questions[0].correct_answer}</button>
+const question = document.createElement("div");
+question.innerHTML = `<h1>${questions[0].question}</h1>
+<form id="formAnswer" onsubmit="nextQuestion(event)" >
+  <button class="answerButton" type="submit">${questions[0].incorrect_answers[0]}</button>
+  <button class="answerButton" type="submit">${questions[0].correct_answer}</button>
   <br />
-  <button class="answerButton">${questions[0].incorrect_answers[1]}</button>
-  <button class="answerButton">${questions[0].incorrect_answers[2]}</button>
+  <button class="answerButton" type="submit">${questions[0].incorrect_answers[1]}</button>
+  <button class="answerButton" type="submit">${questions[0].incorrect_answers[2]}</button>
 </form>`;
-main.appendChild(question1);
+main.appendChild(question);
 
 const footer = document.getElementsByTagName("footer")[0];
 const numberQuestion = document.createElement("p");
 numberQuestion.classList.add("footerParagraph");
-numberQuestion.innerHTML = `QUESTION 1 <span>/10</span>`;
+numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
 footer.appendChild(numberQuestion);
 body.appendChild(footer);
 
-/*const question = document.createElement("h1");
-const questionNumber = null;
-for (let i = 0; i < questions.length; i++) {
-  question.innerText = `${questions.question}`;
-}
-if (questions.correct_answer === "True" || questions.correct_answer === "False") {
-  for (let i = 0; i < 2; i++) {
-    const buttons = document.createElement("button");
+let indiciIncorrectAnswers = [];
+let randomIndex = () => {
+  for (let i = 0; i < 3; i++) {
+    let indice = parseInt(Math.floor(Math.random() * 3));
+    if (indiciIncorrectAnswers.some((n) => n === indice)) {
+      i--;
+      continue;
+    } else {
+      indiciIncorrectAnswers.push(indice);
+      return indice;
+    }
   }
-} else {
-}*/
+};
+
+let indici = [];
+let randomPosition = () => {
+  for (let i = 0; i < 4; i++) {
+    let posizione = parseInt(Math.floor(Math.random() * 4));
+    if (indici.some((n) => n === posizione)) {
+      i--;
+      continue;
+    } else {
+      indici.push(posizione);
+      return posizione;
+    }
+  }
+};
+
+const nextQuestion = (submitEvent) => {
+  submitEvent.preventDefault();
+  console.log(1);
+  if (questionNumber === questions.length) {
+    //Andare alla pagina risultati
+  } else {
+    questionNumber++;
+    main.innerHTML = "";
+    question.innerHTML = "";
+    const h1 = document.createElement("h1");
+    h1.innerText = `${questions[questionNumber].question}`;
+    const button1 = document.createElement("button");
+    button1.classList.add("answerButton");
+    button1.style.type = "submit";
+    const button2 = document.createElement("button");
+    button2.classList.add("answerButton");
+    button2.style.type = "submit";
+    const button3 = document.createElement("button");
+    button3.classList.add("answerButton");
+    button3.style.type = "submit";
+    const button4 = document.createElement("button");
+    button4.classList.add("answerButton");
+    button4.style.type = "submit";
+    const buttons = [button1, button2, button3, button4];
+    for (let i = 0; i < buttons.length; i++) {
+      console.log(buttons[i].innerText === "");
+    }
+    for (let i = 0; i < buttons.length; i++) {
+      let index = randomIndex();
+      console.log(index);
+      let position = randomPosition();
+      console.log(position);
+      console.log((buttons[position].innerText = `${questions[questionNumber].incorrect_answers[index]}`));
+    }
+    for (let i = 0; i < buttons.length; i++) {
+      if (buttons[i].innerText === "") {
+        buttons[i].innerText = `${questions[questionNumber].correct_answer}`;
+      }
+    }
+    question.innerHTML = `<h1>${questions[questionNumber].question}</h1>
+             <form id="formAnswer" onsubmit="nextQuestion(event)">
+             <button class="answerButton" type="submit">${buttons[0].innerText}</button>
+             <button class="answerButton" type="submit">${buttons[1].innerText}</button>
+             <br />
+             <button class="answerButton" type="submit">${buttons[2].innerText}</button>
+             <button class="answerButton" type="submit">${buttons[3].innerText}</button>
+         </form>`;
+    main.appendChild(question);
+    footer.innerHTML = "";
+    numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
+    footer.appendChild(numberQuestion);
+    body.appendChild(footer);
+  }
+  indici = [];
+  indiciIncorrectAnswers = [];
+};
