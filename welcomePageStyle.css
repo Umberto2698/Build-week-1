@@ -23,6 +23,7 @@ header {
 
 #Logo {
   width: 10rem;
+  cursor: pointer;
 }
 
 main {
@@ -72,8 +73,10 @@ li strong {
 .checkbox {
   border: 3px solid #e7e7eb;
   background-color: #0b113b;
+  cursor: pointer;
 }
 #ProceedButton {
+  cursor: pointer;
   margin-left: 16%;
   background-color: #00ffff;
   text-align: center;
