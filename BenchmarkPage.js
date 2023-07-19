@@ -97,7 +97,7 @@ let correctAnswer = 0;
 let incorrectAnswer = questions.length;
 
 //Funzionalità del timer dinamico
-let timeLimit = 30;
+let timeLimit = 3;
 let timePassed = 0;
 let timeLeft = timeLimit;
 let timerInterval = null;
@@ -324,6 +324,7 @@ const nextQuestion = (submitEvent) => {
         correctAnswer += 1;
       }
     }
+    window.location.replace("feedback-page.html");
     //Se la riposta corretta della domanda corrente è True o False allora verranno generati solo 2 bottoni invece di 4
   } else if (
     questions[questionNumber].correct_answer === "False" ||
