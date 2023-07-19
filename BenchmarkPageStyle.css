@@ -62,7 +62,7 @@ h1 {
   align-items: center;
 }
 
-.answerButton {
+#answerButton {
   border: 1px solid #e7e7eb;
   box-shadow: 0px 0px 0px 0px #e7e7eb;
   border-radius: 50px;
