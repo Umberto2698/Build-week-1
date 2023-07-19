@@ -97,7 +97,7 @@ let correctAnswer = 0;
 let incorrectAnswer = questions.length;
 
 //Funzionalità del timer dinamico
-let timeLimit = 3;
+let timeLimit = 30;
 let timePassed = 0;
 let timeLeft = timeLimit;
 let timerInterval = null;
@@ -314,6 +314,7 @@ const nextQuestion = (submitEvent) => {
         correctAnswer += 1;
       }
     }
+    console.log(lastClickedText);
     console.log(correctAnswer);
     console.log(correctQuestionsAnswer);
   } else if (
