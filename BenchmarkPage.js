@@ -103,7 +103,7 @@ let timeLeft = timeLimit;
 let timerInterval = null;
 
 const div = document.getElementsByClassName("timer")[0];
-const p = document.getElementsByTagName("p")[0];
+const p = document.getElementById("timerStamp");
 p.innerHTML = `second <br /> <span class="spanTimer">${timeLeft}</span> <br /> remaning`;
 div.appendChild(p);
 
@@ -239,9 +239,7 @@ function onTimesUp() {
       buttons = [];
     }
   }
-  //Fine definizione della funzione time0
   lastClickedText.push("");
-  //Richiamo della funzione
   time0();
 }
 
@@ -261,9 +259,7 @@ function formatTime(time) {
   return `${seconds}`;
 }
 
-//Funzionalità quiz game
 let indiciIncorrectAnswers = [];
-//Crea randomicamente i numeri 0,1,2 e li inserisce nell'array indiciIncorrectAnswers qui sopra
 let randomIndex = () => {
   for (let i = 0; i < 3; i++) {
     let indice = parseInt(Math.floor(Math.random() * 3));
@@ -278,7 +274,6 @@ let randomIndex = () => {
 };
 
 let indici = [];
-//Crea randomicamente i numeri 0,1,2,3 e li inserisce nell'array indici qui sopra
 let randomPosition = () => {
   for (let i = 0; i < 4; i++) {
     let posizione = parseInt(Math.floor(Math.random() * 4));
@@ -291,7 +286,6 @@ let randomPosition = () => {
     }
   }
 };
-//Crea randomicamente i numeri 0,1 e li inserisce nell'array indici qui sopra
 let randomPositionTrueFalse = () => {
   for (let i = 0; i < 2; i++) {
     let posizione = parseInt(Math.floor(Math.random() * 2));
@@ -310,13 +304,9 @@ let lastClickedText = [];
 let last = "";
 const nextQuestion = (submitEvent) => {
   submitEvent.preventDefault();
-  //Resetta il timer e lo avvia nuovamente
   clearInterval(timerInterval);
   startTimer(timeLimit, timePassed);
-  //Aumenta l'indice relativo alla domanda
   questionNumber++;
-  //Se abbiamo risposto all'ultima domanda  il ciclo for crea un'array contenente le risposte corrette e successivamente
-  //le confronta (ad uno ad uno)con le risposte dell'utente aumentando man mano il contatore delle risposte corrette
   if (questionNumber === questions.length) {
     for (let i = 0; i < questions.length; i++) {
       correctQuestionsAnswer.push(questions[i].correct_answer);
@@ -324,8 +314,8 @@ const nextQuestion = (submitEvent) => {
         correctAnswer += 1;
       }
     }
-    window.location.replace("feedback-page.html");
-    //Se la riposta corretta della domanda corrente è True o False allora verranno generati solo 2 bottoni invece di 4
+    console.log(correctAnswer);
+    console.log(correctQuestionsAnswer);
   } else if (
     questions[questionNumber].correct_answer === "False" ||
     questions[questionNumber].correct_answer === "True"
@@ -336,8 +326,6 @@ const nextQuestion = (submitEvent) => {
     h1.innerText = `${questions[questionNumber].question}`;
     const form = document.createElement("form");
     form.id = "formAnswer";
-    //Questa funzione permette al browser di capire quale bottone è stato cliccato dall'utente, evidenziandolo.
-    //Inoltre il testo del bottone selezionato verrà inserito nell'array lastClickedText
     form.addEventListener("click", (clicco) => {
       clicco.preventDefault();
       for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
