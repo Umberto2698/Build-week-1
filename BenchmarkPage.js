@@ -81,23 +81,170 @@ const questions = [
     incorrect_answers: ["Python", "C", "Jakarta"],
   },
 ];
-const timeLimit = 30;
+
+const body = document.getElementsByTagName("body")[0];
+const main = document.getElementsByTagName("main")[0];
+const question = document.createElement("div");
+const br = document.createElement("br");
+
+const footer = document.getElementsByTagName("footer")[0];
+const numberQuestion = document.createElement("p");
+numberQuestion.classList.add("footerParagraph");
+
+let questionNumber = 0;
+let correctQuestionsAnswer = [];
+let correctAnswer = 0;
+let incorrectAnswer = questions.length;
+
+//Funzionalità del timer dinamico
+let timeLimit = 3;
 let timePassed = 0;
 let timeLeft = timeLimit;
 let timerInterval = null;
 
 const div = document.getElementsByClassName("timer")[0];
 const p = document.getElementsByTagName("p")[0];
-p.innerHTML = `second <br /> <span class="spanTimer">${timeLimit}</span> <br /> remaning`;
+p.innerHTML = `second <br /> <span class="spanTimer">${timeLeft}</span> <br /> remaning`;
 div.appendChild(p);
 
-startTimer();
-
 function onTimesUp() {
-  clearInterval(timerInterval);
+  function time0() {
+    questionNumber++;
+    if (questionNumber === questions.length) {
+      console.log(lastClickedText);
+      for (let i = 0; i < questions.length; i++) {
+        correctQuestionsAnswer.push(questions[i].correct_answer);
+        if (correctQuestionsAnswer[i] === lastClickedText[i]) {
+          correctAnswer += 1;
+        }
+      }
+      console.log(correctQuestionsAnswer);
+      console.log(correctAnswer);
+    } else {
+      console.log(questionNumber);
+      if (questions[questionNumber].correct_answer === "False" || questions[questionNumber].correct_answer === "True") {
+        clearInterval(timerInterval);
+        startTimer(timeLimit, timePassed);
+        main.innerHTML = "";
+        question.innerHTML = "";
+        const h1 = document.createElement("h1");
+        h1.innerText = `${questions[questionNumber].question}`;
+        const form = document.createElement("form");
+        form.id = "formAnswer";
+        form.addEventListener("click", (clicco) => {
+          clicco.preventDefault();
+          for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
+            if (clicco.currentTarget.childNodes[i].type !== undefined) {
+              clicco.currentTarget.childNodes[i].id = "answerButton";
+            }
+          }
+          if (clicco.target.tagName === "BUTTON") {
+            clicco.target.id = "selectedButton";
+            let last = clicco.target.innerText;
+            lastClickedText.splice(questionNumber, 1, last);
+          }
+        });
+        let index = 0;
+        for (let i = 0; i < 2; i++) {
+          const button = document.createElement("button");
+          button.id = "answerButton";
+          button.style.type = "submit";
+          button.style.cursor = "pointer";
+          buttons.push(button);
+          randomPositionTrueFalse();
+        }
+        buttons[indici[0]].innerText = `${questions[questionNumber].incorrect_answers[index]}`;
+        for (let i = 0; i < buttons.length; i++) {
+          if (buttons[i].innerText === "") {
+            buttons[i].innerText = `${questions[questionNumber].correct_answer}`;
+          }
+        }
+        form.appendChild(buttons[0]);
+        form.appendChild(buttons[1]);
+        question.appendChild(h1);
+        question.appendChild(form);
+        main.appendChild(question);
+        const next = document.createElement("button");
+        next.id = "answerButton";
+        next.innerText = "Next question";
+        next.style.cursor = "pointer";
+        next.onclick = nextQuestion;
+        main.appendChild(next);
+        footer.innerHTML = "";
+        numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
+        footer.appendChild(numberQuestion);
+        body.appendChild(footer);
+        indici = [];
+        indiciIncorrectAnswers = [];
+        buttons = [];
+      } else {
+        clearInterval(timerInterval);
+        startTimer(timeLimit, timePassed);
+        main.innerHTML = "";
+        question.innerHTML = "";
+        const h1 = document.createElement("h1");
+        h1.innerText = `${questions[questionNumber].question}`;
+        const form = document.createElement("form");
+        form.id = "formAnswer";
+        form.addEventListener("click", (clicco) => {
+          clicco.preventDefault();
+          for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
+            if (clicco.currentTarget.childNodes[i].type !== undefined) {
+              clicco.currentTarget.childNodes[i].id = "answerButton";
+            }
+          }
+          if (clicco.target.tagName === "BUTTON") {
+            clicco.target.id = "selectedButton";
+            let last = clicco.target.innerText;
+            lastClickedText.splice(questionNumber, 1, last);
+          }
+        });
+        for (let i = 0; i < 4; i++) {
+          const button = document.createElement("button");
+          button.id = "answerButton";
+          button.style.type = "submit";
+          button.style.cursor = "pointer";
+          buttons.push(button);
+          randomPosition();
+        }
+        for (let i = 0; i < 3; i++) {
+          let index = randomIndex();
+          buttons[indici[i]].innerText = `${questions[questionNumber].incorrect_answers[index]}`;
+        }
+        for (let i = 0; i < buttons.length; i++) {
+          if (buttons[i].innerText === "") {
+            buttons[i].innerText = `${questions[questionNumber].correct_answer}`;
+          }
+        }
+        form.appendChild(buttons[0]);
+        form.appendChild(buttons[1]);
+        form.appendChild(br);
+        form.appendChild(buttons[2]);
+        form.appendChild(buttons[3]);
+        question.appendChild(h1);
+        question.appendChild(form);
+        main.appendChild(question);
+        const next = document.createElement("button");
+        next.id = "answerButton";
+        next.innerText = "Next question";
+        next.style.cursor = "pointer";
+        next.onclick = nextQuestion;
+        main.appendChild(next);
+        footer.innerHTML = "";
+        numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
+        footer.appendChild(numberQuestion);
+        body.appendChild(footer);
+      }
+      indici = [];
+      indiciIncorrectAnswers = [];
+      buttons = [];
+    }
+  }
+  lastClickedText.push("");
+  time0();
 }
 
-function startTimer() {
+function startTimer(timeLimit, timePassed) {
   timerInterval = setInterval(() => {
     timePassed = timePassed += 1;
     timeLeft = timeLimit - timePassed;
@@ -113,19 +260,30 @@ function formatTime(time) {
   return `${seconds}`;
 }
 
-const body = document.getElementsByTagName("body")[0];
-const main = document.getElementsByTagName("main")[0];
-const question = document.createElement("div");
-const br = document.createElement("br");
+//Funzionalità quiz game
 
-const footer = document.getElementsByTagName("footer")[0];
-const numberQuestion = document.createElement("p");
-numberQuestion.classList.add("footerParagraph");
+// Options for the observer (which mutations to observe)
+// const config = { innerText: 0 };
 
-let questionNumber = 0;
-let correctQuestionsAnswer = [];
-let correctAnswer = 0;
-let incorrectAnswer = questions.length;
+// // Callback function to execute when mutations are observed
+// const callback = (mutationList, observer) => {
+//   for (const mutation of mutationList) {
+//     if (mutation.type === "childList") {
+//       console.log("A child node has been added or removed.");
+//     } else if (mutation.type === "attributes") {
+//       console.log(`The ${mutation.attributeName} attribute was modified.`);
+//     }
+//   }
+// };
+
+// // Create an observer instance linked to the callback function
+// const observer = new MutationObserver(callback);
+
+// Start observing the target node for configured mutations
+//observer.observe(targetNode, config);
+
+// Later, you can stop observing
+//observer.disconnect();
 
 let indiciIncorrectAnswers = [];
 let randomIndex = () => {
@@ -172,6 +330,8 @@ let lastClickedText = [];
 let last = "";
 const nextQuestion = (submitEvent) => {
   submitEvent.preventDefault();
+  clearInterval(timerInterval);
+  startTimer(timeLimit, timePassed);
   questionNumber++;
   if (questionNumber === questions.length) {
     console.log(lastClickedText);
@@ -298,9 +458,11 @@ const nextQuestion = (submitEvent) => {
   indici = [];
   indiciIncorrectAnswers = [];
   buttons = [];
+  lastClickedText.push("");
 };
 
 const firstQuestion = () => {
+  startTimer(timeLimit, timePassed);
   main.innerHTML = "";
   question.innerHTML = "";
   const h1 = document.createElement("h1");
@@ -358,5 +520,6 @@ const firstQuestion = () => {
   indici = [];
   indiciIncorrectAnswers = [];
   buttons = [];
+  lastClickedText.push("");
 };
 firstQuestion();
