@@ -97,7 +97,7 @@ let correctAnswer = 0;
 let incorrectAnswer = questions.length;
 
 //Funzionalità del timer dinamico
-let timeLimit = 3;
+let timeLimit = 30;
 let timePassed = 0;
 let timeLeft = timeLimit;
 let timerInterval = null;
@@ -121,7 +121,6 @@ function onTimesUp() {
       console.log(correctQuestionsAnswer);
       console.log(correctAnswer);
     } else {
-      console.log(questionNumber);
       if (questions[questionNumber].correct_answer === "False" || questions[questionNumber].correct_answer === "True") {
         clearInterval(timerInterval);
         startTimer(timeLimit, timePassed);
