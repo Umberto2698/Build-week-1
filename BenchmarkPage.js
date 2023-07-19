@@ -90,7 +90,6 @@ const footer = document.getElementsByTagName("footer")[0];
 const numberQuestion = document.createElement("p");
 numberQuestion.classList.add("footerParagraph");
 
-/*Ho ricreato la pagina con JS*/
 let questionNumber = 0;
 let correctQuestionsAnswer = [];
 let correctAnswer = 0;
@@ -268,12 +267,6 @@ const nextQuestion = (submitEvent) => {
   indiciIncorrectAnswers = [];
   buttons = [];
 };
-// const clicked = (clicco) => {
-//   for (let i = 0; i < buttons.length; i++) {
-//     buttons[i].id = "answerButton ";
-//   }
-//   clicco.target.id = "selectedButton";
-// };
 
 const firstQuestion = () => {
   main.innerHTML = "";
