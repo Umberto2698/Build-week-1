@@ -82,6 +82,7 @@ const questions = [
   },
 ];
 
+const header = document.getElementsByTagName("header")[0];
 const body = document.getElementsByTagName("body")[0];
 const main = document.getElementsByTagName("main")[0];
 const question = document.createElement("div");
@@ -139,14 +140,25 @@ promotions / spam folder)`;
 let timeLimit = 30;
 let timePassed = 0;
 let timeLeft = timeLimit;
-let timerInterval = null;
+let timeGradient = 0;
 
-const div = document.getElementsByClassName("timer")[0];
-const p = document.getElementById("timerStamp");
-p.innerHTML = `second <br /> <span class="spanTimer">${timeLeft}</span> <br /> remaning`;
-div.appendChild(p);
+//const div = document.getElementsByClassName("timer")[0];
+//const p = document.getElementById("timerStamp");
 
 function onTimesUp() {
+  timeLimit = timeLimit;
+  header.innerHTML = "";
+  header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
+      <div id="timerContainer" style="background : conic-gradient(#00ffff ${0}deg, #98699c ${0}deg);">
+        <div class="timer">
+          <p id="timerStamp">
+            second <br />
+            <span class="spanTimer">${0}</span>
+            <br />
+            remaning
+          </p>
+        </div>
+      </div>`;
   function time0() {
     questionNumber++;
     if (questionNumber === questions.length) {
@@ -157,6 +169,7 @@ function onTimesUp() {
         }
       }
       incorrectAnswer = questions.length - correctAnswer;
+      let correctGradient = (correctAnswer * 360) / 10;
       corrPercentage();
       incorrPercentage();
       chartText();
@@ -169,7 +182,7 @@ function onTimesUp() {
           <h4>${correctH4.innerText}</h4>
           <h5>${correctH5.innerText}</h5>
         </div>
-        <div>
+        <div style="background: conic-gradient(#00ffff ${correctGradient}deg, #c2128d ${correctGradient}deg);">
           <div id="chart">
           <p>${pText.innerHTML}</p>
           <p>${secondP.innerHTML}</p>
@@ -187,7 +200,6 @@ function onTimesUp() {
       <script src="./BenchmarkPage.js"></script>`;
     } else {
       if (questions[questionNumber].correct_answer === "False" || questions[questionNumber].correct_answer === "True") {
-        clearInterval(timerInterval);
         startTimer(timeLimit, timePassed);
         main.innerHTML = "";
         question.innerHTML = "";
@@ -243,7 +255,6 @@ function onTimesUp() {
         indiciIncorrectAnswers = [];
         buttons = [];
       } else {
-        clearInterval(timerInterval);
         startTimer(timeLimit, timePassed);
         main.innerHTML = "";
         question.innerHTML = "";
@@ -311,16 +322,31 @@ function onTimesUp() {
 }
 
 function startTimer(timeLimit, timePassed) {
+  let timeLeft = timeLimit;
   timerInterval = setInterval(() => {
-    timePassed = timePassed += 1;
-    timeLeft = timeLimit - timePassed;
-    p.innerHTML = `second <br /> <span class="spanTimer">${timeLeft}</span> <br /> remaning`;
-
     if (timeLeft === 0) {
+      clearInterval(timerInterval);
       onTimesUp();
+    } else {
+      timeGradient = (timeLeft * 360) / 30;
+      header.innerHTML = "";
+      header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
+      <div id="timerContainer" style="background : conic-gradient(#00ffff ${timeGradient}deg, #98699c ${timeGradient}deg);">
+        <div class="timer">
+          <p id="timerStamp">
+            second <br />
+            <span class="spanTimer">${timeLeft}</span>
+            <br />
+            remaning
+          </p>
+        </div>
+      </div>`;
+      timePassed = timePassed += 1;
+      timeLeft = timeLimit - timePassed;
     }
   }, 1000);
 }
+
 function formatTime(time) {
   let seconds = time % 60;
   return `${seconds}`;
@@ -367,8 +393,20 @@ let randomPositionTrueFalse = () => {
 };
 
 const nextQuestion = (submitEvent) => {
-  submitEvent.preventDefault();
   clearInterval(timerInterval);
+  submitEvent.preventDefault();
+  header.innerHTML = "";
+  header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
+      <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
+        <div class="timer">
+          <p id="timerStamp">
+            second <br />
+            <span class="spanTimer">${timeLeft}</span>
+            <br />
+            remaning
+          </p>
+        </div>
+      </div>`;
   startTimer(timeLimit, timePassed);
   questionNumber++;
   if (questionNumber === questions.length) {
@@ -379,6 +417,7 @@ const nextQuestion = (submitEvent) => {
       }
     }
     incorrectAnswer = questions.length - correctAnswer;
+    let correctGradient = (correctAnswer * 360) / 10;
     corrPercentage();
     incorrPercentage();
     chartText();
@@ -391,7 +430,7 @@ const nextQuestion = (submitEvent) => {
           <h4>${correctH4.innerText}</h4>
           <h5>${correctH5.innerText}</h5>
         </div>
-        <div>
+        <div style="background: conic-gradient(#00ffff ${correctGradient}deg, #c2128d ${correctGradient}deg);">
           <div id="chart">
           <p>${pText.innerHTML}</p>
           <p>${secondP.innerHTML}</p>
@@ -527,7 +566,26 @@ const nextQuestion = (submitEvent) => {
   lastClickedText.push("");
 };
 
+const img = document.createElement("img");
+img.id = "Logo";
+img.src = "assets/epicode_logo.png";
+
 const firstQuestion = () => {
+  header.innerHTML = "";
+  const timerContainer = document.createElement("div");
+  timerContainer.innerHTML = "";
+  timerContainer.id = "timerContainer";
+  timerContainer.style = "background : conic-gradient(#98699c 0deg, #00ffff 0deg);";
+  const div = document.createElement("div");
+  div.innerHTML = "";
+  div.classList.add("timer");
+  const p = document.createElement("p");
+  p.innerHTML = `second <br /> <span class="spanTimer">${timeLeft}</span> <br /> remaning`;
+  p.id = "timerStamp";
+  div.appendChild(p);
+  timerContainer.appendChild(div);
+  header.appendChild(img);
+  header.appendChild(timerContainer);
   startTimer(timeLimit, timePassed);
   main.innerHTML = "";
   question.innerHTML = "";

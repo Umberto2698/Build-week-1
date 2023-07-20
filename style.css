@@ -27,6 +27,14 @@ header {
   padding-left: 20%;
 }
 
+#timerContainer {
+  display: inline-block;
+  margin-left: 58%;
+  border-radius: 50%;
+  width: 8em;
+  height: 8em;
+}
+
 #Logo {
   width: 10rem;
   margin-bottom: 7%;
@@ -47,16 +55,18 @@ header {
 .timer {
   height: 110px;
   width: 110px;
-  border: 7px solid #00ffff;
+  border: 1px solid transparent;
   border-radius: 50%;
-  margin-left: 58%;
+  margin-left: 7.6%;
+  margin-top: 7%;
   color: #e7e7eb;
   text-align: center;
-  padding: 1%;
+  padding-top: 12%;
   text-transform: uppercase;
   font-size: 0.5rem;
   margin-bottom: 0%;
   display: inline-block;
+  background-color: #3e1757;
 }
 
 .spanTimer {
@@ -187,7 +197,6 @@ main > div:nth-child(4) {
   margin-inline: 5%;
   border-radius: 50%;
   padding: 2% 2%;
-  background: conic-gradient(#c2128d 120deg, #00ffff 120deg);
 }
 
 #chart {
