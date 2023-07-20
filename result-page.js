@@ -1,6 +1,3 @@
-let sumCorrectAnswer = 4;
-console.log(correctAnswer);
-let questions = 10;
 const correct = document.getElementById("correctAnswer");
 const correctH4 = document.createElement("h4");
 const correctH5 = document.createElement("h5");

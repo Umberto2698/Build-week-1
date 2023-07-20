@@ -92,10 +92,48 @@ const footer = document.getElementsByTagName("footer")[0];
 const numberQuestion = document.createElement("p");
 numberQuestion.classList.add("footerParagraph");
 
+const correctH4 = document.createElement("h4");
+const correctH5 = document.createElement("h5");
+
+const incorrectH4 = document.createElement("h4");
+const incorrectH5 = document.createElement("h5");
+
+const pText = document.createElement("p");
+const secondP = document.createElement("p");
+
 let questionNumber = 0;
 let correctQuestionsAnswer = [];
 let correctAnswer = 0;
-let incorrectAnswer = questions.length;
+let incorrectAnswer = 0;
+
+let buttons = [];
+let lastClickedText = [];
+let last = "";
+
+function corrPercentage() {
+  correctH4.innerText = `${(correctAnswer * 100) / questions.length}%`;
+  correctH5.innerText = `${correctAnswer} / ${questions.length} questions`;
+}
+
+function incorrPercentage() {
+  incorrectH4.innerText = `${100 - (correctAnswer * 100) / questions.length}%`;
+  incorrectH5.innerText = `${incorrectAnswer} / ${questions.length} questions`;
+}
+
+function chartText() {
+  if (correctAnswer >= 5) {
+    pText.innerHTML = `Congratulations! <br /><span>You passed the exam.</span>`;
+    secondP.innerHTML = `We'll send you the certificate <br />
+in few minutes. <br />
+Check your email (including <br />
+promotions / spam folder)`;
+  } else {
+    pText.innerHTML = `Sorry! <br /><span>You failed the exam.</span>`;
+    secondP.innerHTML = `This time it went wrong. <br />
+  We will notify you <br />
+  when you can try again`;
+  }
+}
 
 //Funzionalità del timer dinamico
 let timeLimit = 30;
@@ -112,15 +150,41 @@ function onTimesUp() {
   function time0() {
     questionNumber++;
     if (questionNumber === questions.length) {
-      console.log(lastClickedText);
       for (let i = 0; i < questions.length; i++) {
         correctQuestionsAnswer.push(questions[i].correct_answer);
         if (correctQuestionsAnswer[i] === lastClickedText[i]) {
           correctAnswer += 1;
         }
       }
-      console.log(correctQuestionsAnswer);
-      console.log(correctAnswer);
+      incorrectAnswer = questions.length - correctAnswer;
+      corrPercentage();
+      incorrPercentage();
+      chartText();
+      body.innerHTML = `<div id="logoContainer"><img src="./assets/epicode_logo.png" alt="Logo EPICODE" class="logo" /></div>
+      <main>
+        <h1>Results</h1>
+        <h2>The summary of your answers:</h2>
+        <div id="correctAnswer">
+          <h3>Correct</h3>
+          <h4>${correctH4.innerText}</h4>
+          <h5>${correctH5.innerText}</h5>
+        </div>
+        <div>
+          <div id="chart">
+          <p>${pText.innerHTML}</p>
+          <p>${secondP.innerHTML}</p>
+          </div>
+        </div>
+        <div id="incorrectAnswer">
+          <h3>Wrong</h3>
+          <h4>${incorrectH4.innerText}</h4>
+          <h5>${incorrectH5.innerText}</h5>
+        </div>
+        <footer>
+          <a href="feedback-page.html"><button id="rateUs">RATE US</button></a>
+        </footer>
+      </main>
+      <script src="./BenchmarkPage.js"></script>`;
     } else {
       if (questions[questionNumber].correct_answer === "False" || questions[questionNumber].correct_answer === "True") {
         clearInterval(timerInterval);
@@ -166,12 +230,12 @@ function onTimesUp() {
         question.appendChild(form);
         main.appendChild(question);
         const next = document.createElement("button");
-        next.id = "answerButton";
+        next.id = "rateUs";
         next.innerText = "Next question";
         next.style.cursor = "pointer";
         next.onclick = nextQuestion;
-        main.appendChild(next);
         footer.innerHTML = "";
+        footer.appendChild(next);
         numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
         footer.appendChild(numberQuestion);
         body.appendChild(footer);
@@ -227,12 +291,12 @@ function onTimesUp() {
         question.appendChild(form);
         main.appendChild(question);
         const next = document.createElement("button");
-        next.id = "answerButton";
+        next.id = "rateUs";
         next.innerText = "Next question";
         next.style.cursor = "pointer";
         next.onclick = nextQuestion;
-        main.appendChild(next);
         footer.innerHTML = "";
+        footer.appendChild(next);
         numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
         footer.appendChild(numberQuestion);
         body.appendChild(footer);
@@ -302,9 +366,6 @@ let randomPositionTrueFalse = () => {
   }
 };
 
-let buttons = [];
-let lastClickedText = [];
-let last = "";
 const nextQuestion = (submitEvent) => {
   submitEvent.preventDefault();
   clearInterval(timerInterval);
@@ -317,9 +378,35 @@ const nextQuestion = (submitEvent) => {
         correctAnswer += 1;
       }
     }
-    console.log(lastClickedText);
-    console.log(correctAnswer);
-    console.log(correctQuestionsAnswer);
+    incorrectAnswer = questions.length - correctAnswer;
+    corrPercentage();
+    incorrPercentage();
+    chartText();
+    body.innerHTML = `<div id="logoContainer"><img src="./assets/epicode_logo.png" alt="Logo EPICODE" class="logo" /></div>
+      <main>
+        <h1>Results</h1>
+        <h2>The summary of your answers:</h2>
+        <div id="correctAnswer">
+          <h3>Correct</h3>
+          <h4>${correctH4.innerText}</h4>
+          <h5>${correctH5.innerText}</h5>
+        </div>
+        <div>
+          <div id="chart">
+          <p>${pText.innerHTML}</p>
+          <p>${secondP.innerHTML}</p>
+          </div>
+        </div>
+        <div id="incorrectAnswer">
+          <h3>Wrong</h3>
+          <h4>${incorrectH4.innerText}</h4>
+          <h5>${incorrectH5.innerText}</h5>
+        </div>
+        <footer>
+          <a href="feedback-page.html"><button id="rateUs">RATE US</button></a>
+        </footer>
+      </main>
+      <script src="./BenchmarkPage.js"></script>`;
   } else if (
     questions[questionNumber].correct_answer === "False" ||
     questions[questionNumber].correct_answer === "True"
@@ -365,12 +452,12 @@ const nextQuestion = (submitEvent) => {
     question.appendChild(form);
     main.appendChild(question);
     const next = document.createElement("button");
-    next.id = "answerButton";
+    next.id = "rateUs";
     next.innerText = "Next question";
     next.style.cursor = "pointer";
     next.onclick = nextQuestion;
-    main.appendChild(next);
     footer.innerHTML = "";
+    footer.appendChild(next);
     numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
     footer.appendChild(numberQuestion);
     body.appendChild(footer);
@@ -424,12 +511,12 @@ const nextQuestion = (submitEvent) => {
     question.appendChild(form);
     main.appendChild(question);
     const next = document.createElement("button");
-    next.id = "answerButton";
+    next.id = "rateUs";
     next.innerText = "Next question";
     next.style.cursor = "pointer";
     next.onclick = nextQuestion;
-    main.appendChild(next);
     footer.innerHTML = "";
+    footer.appendChild(next);
     numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
     footer.appendChild(numberQuestion);
     body.appendChild(footer);
@@ -488,12 +575,12 @@ const firstQuestion = () => {
   question.appendChild(form);
   main.appendChild(question);
   const next = document.createElement("button");
-  next.id = "answerButton";
+  next.id = "rateUs";
   next.innerText = "Next question";
   next.style.cursor = "pointer";
   next.onclick = nextQuestion;
-  main.appendChild(next);
   footer.innerHTML = "";
+  footer.appendChild(next);
   numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
   footer.appendChild(numberQuestion);
   body.appendChild(footer);
