@@ -81,14 +81,14 @@ const questions = [
   },
 ];
 
-const header = document.getElementsByTagName("header")[0];
+const header = document.createElement("header");
 const body = document.getElementsByTagName("body")[0];
-const main = document.getElementsByTagName("main")[0];
+const main = document.createElement("main");
 const question = document.createElement("div");
 question.classList.add("normal");
 const br = document.createElement("br");
 
-const footer = document.getElementsByTagName("footer")[0];
+const footer = document.createElement("footer");
 const numberQuestion = document.createElement("p");
 numberQuestion.classList.add("footerParagraph");
 
@@ -143,7 +143,7 @@ let timeGradient = 0;
 
 function onTimesUp() {
   header.innerHTML = "";
-  header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
+  header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
       <div id="timerContainer" style="background : conic-gradient(#00ffff ${0}deg, #98699c ${0}deg);">
         <div class="timer">
           <p id="timerStamp">
@@ -196,7 +196,7 @@ function onTimesUp() {
     } else {
       if (questions[questionNumber].correct_answer === "False" || questions[questionNumber].correct_answer === "True") {
         header.innerHTML = "";
-        header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
+        header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
       <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
         <div class="timer">
           <p id="timerStamp">
@@ -263,7 +263,7 @@ function onTimesUp() {
         buttons = [];
       } else {
         header.innerHTML = "";
-        header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
+        header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
       <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
         <div class="timer">
           <p id="timerStamp">
@@ -352,7 +352,7 @@ function startTimer(timeLimit, timePassed) {
       timeLeft = timeLimit - timePassed;
       timeGradient = (timeLeft * 360) / timeLimit;
       header.innerHTML = "";
-      header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
+      header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
       <div id="timerContainer" style="background : conic-gradient(#00ffff ${timeGradient}deg, #98699c ${timeGradient}deg);">
         <div class="timer">
           <p id="timerStamp">
@@ -417,7 +417,7 @@ const nextQuestion = (submitEvent) => {
   clearInterval(timerInterval);
   submitEvent.preventDefault();
   header.innerHTML = "";
-  header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
+  header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
       <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
         <div class="timer">
           <p id="timerStamp">
@@ -589,7 +589,7 @@ const nextQuestion = (submitEvent) => {
 
 const firstQuestion = () => {
   header.innerHTML = "";
-  header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
+  header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
   <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
     <div class="timer">
       <p id="timerStamp">
@@ -655,6 +655,8 @@ const firstQuestion = () => {
   footer.appendChild(next);
   numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
   footer.appendChild(numberQuestion);
+  body.appendChild(header);
+  body.appendChild(main);
   body.appendChild(footer);
   indici = [];
   indiciIncorrectAnswers = [];

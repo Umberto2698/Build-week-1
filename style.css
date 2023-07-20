@@ -29,7 +29,7 @@ header {
 
 #timerContainer {
   display: inline-block;
-  margin-left: 58%;
+  margin-left: 45%;
   border-radius: 50%;
   width: 8em;
   height: 8em;
@@ -40,6 +40,14 @@ header {
   margin-bottom: 7%;
   cursor: pointer;
 }
+
+#benchmarkLogo {
+  width: 10rem;
+  margin-bottom: 7%;
+  cursor: pointer;
+  margin-left: 12%;
+}
+
 #welcomeMain {
   margin: 5%;
   text-align: left;
