@@ -142,11 +142,7 @@ let timePassed = 0;
 let timeLeft = timeLimit;
 let timeGradient = 0;
 
-//const div = document.getElementsByClassName("timer")[0];
-//const p = document.getElementById("timerStamp");
-
 function onTimesUp() {
-  timeLimit = timeLimit;
   header.innerHTML = "";
   header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
       <div id="timerContainer" style="background : conic-gradient(#00ffff ${0}deg, #98699c ${0}deg);">
@@ -200,6 +196,18 @@ function onTimesUp() {
       <script src="./BenchmarkPage.js"></script>`;
     } else {
       if (questions[questionNumber].correct_answer === "False" || questions[questionNumber].correct_answer === "True") {
+        header.innerHTML = "";
+        header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
+      <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
+        <div class="timer">
+          <p id="timerStamp">
+            second <br />
+            <span class="spanTimer">${timeLimit}</span>
+            <br />
+            remaning
+          </p>
+        </div>
+      </div>`;
         startTimer(timeLimit, timePassed);
         main.innerHTML = "";
         question.innerHTML = "";
@@ -255,6 +263,18 @@ function onTimesUp() {
         indiciIncorrectAnswers = [];
         buttons = [];
       } else {
+        header.innerHTML = "";
+        header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
+      <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
+        <div class="timer">
+          <p id="timerStamp">
+            second <br />
+            <span class="spanTimer">${timeLimit}</span>
+            <br />
+            remaning
+          </p>
+        </div>
+      </div>`;
         startTimer(timeLimit, timePassed);
         main.innerHTML = "";
         question.innerHTML = "";
@@ -323,11 +343,14 @@ function onTimesUp() {
 
 function startTimer(timeLimit, timePassed) {
   let timeLeft = timeLimit;
+  console.log(timeLeft);
   timerInterval = setInterval(() => {
     if (timeLeft === 0) {
       clearInterval(timerInterval);
       onTimesUp();
     } else {
+      timePassed = timePassed += 1;
+      timeLeft = timeLimit - timePassed;
       timeGradient = (timeLeft * 360) / 30;
       header.innerHTML = "";
       header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
@@ -341,8 +364,7 @@ function startTimer(timeLimit, timePassed) {
           </p>
         </div>
       </div>`;
-      timePassed = timePassed += 1;
-      timeLeft = timeLimit - timePassed;
+      console.log(timeLeft);
     }
   }, 1000);
 }
@@ -566,26 +588,19 @@ const nextQuestion = (submitEvent) => {
   lastClickedText.push("");
 };
 
-const img = document.createElement("img");
-img.id = "Logo";
-img.src = "assets/epicode_logo.png";
-
 const firstQuestion = () => {
   header.innerHTML = "";
-  const timerContainer = document.createElement("div");
-  timerContainer.innerHTML = "";
-  timerContainer.id = "timerContainer";
-  timerContainer.style = "background : conic-gradient(#98699c 0deg, #00ffff 0deg);";
-  const div = document.createElement("div");
-  div.innerHTML = "";
-  div.classList.add("timer");
-  const p = document.createElement("p");
-  p.innerHTML = `second <br /> <span class="spanTimer">${timeLeft}</span> <br /> remaning`;
-  p.id = "timerStamp";
-  div.appendChild(p);
-  timerContainer.appendChild(div);
-  header.appendChild(img);
-  header.appendChild(timerContainer);
+  header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
+  <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
+    <div class="timer">
+      <p id="timerStamp">
+        second <br />
+        <span class="spanTimer">${timeLimit}</span>
+        <br />
+        remaning
+      </p>
+    </div>
+  </div>`;
   startTimer(timeLimit, timePassed);
   main.innerHTML = "";
   question.innerHTML = "";
