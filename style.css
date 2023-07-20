@@ -19,13 +19,13 @@ header {
   padding-right: 14%;
   padding-left: 20%;
 }
-header > div {
+
+#timerContainer {
   display: inline-block;
   margin-left: 58%;
   border-radius: 50%;
   width: 8em;
   height: 8em;
-  background: conic-gradient(#98699c 120deg, #00ffff 120deg);
 }
 
 #Logo {
