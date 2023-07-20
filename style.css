@@ -357,6 +357,12 @@ li strong {
   padding: 3% 28%;
 }
 
+#feedbackHeader {
+  margin: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+
 #feedbackParagraph {
   color: #e7e7eb;
   font-weight: 300;
@@ -367,6 +373,8 @@ li strong {
 }
 #starCont {
   margin-bottom: 10%;
+  text-align: center;
+  display: block;
 }
 
 .star {
