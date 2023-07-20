@@ -157,6 +157,7 @@ function onTimesUp() {
         }
       }
       incorrectAnswer = questions.length - correctAnswer;
+      let correctGradient = (correctAnswer * 360) / 10;
       corrPercentage();
       incorrPercentage();
       chartText();
@@ -169,7 +170,7 @@ function onTimesUp() {
           <h4>${correctH4.innerText}</h4>
           <h5>${correctH5.innerText}</h5>
         </div>
-        <div>
+        <div style="background: conic-gradient(#00ffff ${correctGradient}deg, #c2128d ${correctGradient}deg);">
           <div id="chart">
           <p>${pText.innerHTML}</p>
           <p>${secondP.innerHTML}</p>
@@ -379,6 +380,7 @@ const nextQuestion = (submitEvent) => {
       }
     }
     incorrectAnswer = questions.length - correctAnswer;
+    let correctGradient = (correctAnswer * 360) / 10;
     corrPercentage();
     incorrPercentage();
     chartText();
@@ -391,7 +393,7 @@ const nextQuestion = (submitEvent) => {
           <h4>${correctH4.innerText}</h4>
           <h5>${correctH5.innerText}</h5>
         </div>
-        <div>
+        <div style="background: conic-gradient(#00ffff ${correctGradient}deg, #c2128d ${correctGradient}deg);">
           <div id="chart">
           <p>${pText.innerHTML}</p>
           <p>${secondP.innerHTML}</p>
