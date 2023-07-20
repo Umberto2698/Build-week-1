@@ -204,8 +204,8 @@ main > div:nth-child(4) {
   border-radius: 50%;
   width: 20em;
   height: 20em;
-  margin-left: 7.8%;
-  margin-top: 7%;
+  margin-left: 10.8%;
+  margin-top: 10%;
   background-image: url(./assets/bg.jpg);
   background-size: 1250px;
   background-position: 749px;
@@ -363,7 +363,7 @@ li strong {
   background-image: url(./assets/bg.jpg);
   background-size: cover;
   background-position: left;
-  padding: 3% 28%;
+  padding: 3% 16%;
 }
 
 #feedbackHeader {
