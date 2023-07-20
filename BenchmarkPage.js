@@ -85,6 +85,7 @@ const questions = [
 const body = document.getElementsByTagName("body")[0];
 const main = document.getElementsByTagName("main")[0];
 const question = document.createElement("div");
+question.classList.add("normal");
 const br = document.createElement("br");
 
 const footer = document.getElementsByTagName("footer")[0];
@@ -127,6 +128,7 @@ function onTimesUp() {
         main.innerHTML = "";
         question.innerHTML = "";
         const h1 = document.createElement("h1");
+        h1.classList.add("title");
         h1.innerText = `${questions[questionNumber].question}`;
         const form = document.createElement("form");
         form.id = "formAnswer";
@@ -182,6 +184,7 @@ function onTimesUp() {
         main.innerHTML = "";
         question.innerHTML = "";
         const h1 = document.createElement("h1");
+        h1.classList.add("title");
         h1.innerText = `${questions[questionNumber].question}`;
         const form = document.createElement("form");
         form.id = "formAnswer";
@@ -324,6 +327,7 @@ const nextQuestion = (submitEvent) => {
     main.innerHTML = "";
     question.innerHTML = "";
     const h1 = document.createElement("h1");
+    h1.classList.add("title");
     h1.innerText = `${questions[questionNumber].question}`;
     const form = document.createElement("form");
     form.id = "formAnswer";
@@ -377,6 +381,7 @@ const nextQuestion = (submitEvent) => {
     main.innerHTML = "";
     question.innerHTML = "";
     const h1 = document.createElement("h1");
+    h1.classList.add("title");
     h1.innerText = `${questions[questionNumber].question}`;
     const form = document.createElement("form");
     form.id = "formAnswer";
@@ -440,6 +445,7 @@ const firstQuestion = () => {
   main.innerHTML = "";
   question.innerHTML = "";
   const h1 = document.createElement("h1");
+  h1.classList.add("title");
   h1.innerText = `${questions[questionNumber].question}`;
   const form = document.createElement("form");
   form.id = "formAnswer";

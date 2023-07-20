@@ -10,7 +10,7 @@ body {
   background-image: url(./assets/bg.jpg);
   background-size: cover;
   background-position: left;
-  padding: 3%, 5%;
+  padding: 3% 5%;
   font-family: "Outfit", sans-serif;
 }
 
@@ -23,6 +23,7 @@ header {
 #Logo {
   width: 10rem;
   margin-bottom: 7%;
+  cursor: pointer;
 }
 
 .timer {
@@ -49,8 +50,15 @@ main {
   margin: 5em 10em;
   text-align: center;
 }
-h1 {
+
+.normal {
+  display: block;
   color: #e7e7eb;
+  margin-top: 0;
+}
+
+.title {
+  font-weight: 400;
   font-size: 3rem;
   margin-bottom: 4%;
 }
@@ -85,10 +93,10 @@ h1 {
   font-family: "Outfit", sans-serif;
   font-weight: 700;
   font-size: 1em;
-  color: #e7e7eb;
   width: 20rem;
   height: 4rem;
   margin: 1%;
+  color: #e7e7eb;
 }
 .footerParagraph {
   font-size: 1rem;
@@ -105,4 +113,112 @@ footer p span {
   margin-bottom: 4%;
   line-height: normal;
   text-align: center;
+}
+
+#logoContainer {
+  margin-left: 25%;
+}
+
+.logo {
+  width: 10rem;
+  cursor: pointer;
+}
+
+h1 {
+  font-weight: bold;
+  color: #e7e7eb;
+  font-size: 5em;
+  margin-bottom: 0.3%;
+}
+
+h2 {
+  font-weight: 300;
+  color: #e7e7eb;
+  font-size: 2em;
+  line-height: normal;
+}
+
+main > div {
+  display: inline-block;
+  color: #e7e7eb;
+  margin-top: 4em;
+}
+
+h3 {
+  font-size: 3em;
+}
+
+h4 {
+  font-size: 3.5em;
+  font-weight: bold;
+}
+
+h5 {
+  font-size: 1.2em;
+  font-weight: 300;
+  color: #a4a6b6;
+}
+
+main > div:nth-child(3) {
+  text-align: left;
+}
+
+main > div:nth-child(4) {
+  width: 28em;
+  height: 28em;
+  margin-inline: 5%;
+  border-radius: 50%;
+  padding: 2% 2%;
+  background: conic-gradient(#c2128d 120deg, #00ffff 120deg);
+}
+
+#chart {
+  border: 1px solid transparent;
+  border-radius: 50%;
+  width: 20em;
+  height: 20em;
+  margin-left: 7.8%;
+  margin-top: 7%;
+  background-image: url(./assets/bg.jpg);
+  background-size: 1250px;
+  background-position: 749px;
+}
+
+main > div > div > p:first-child {
+  font-size: 1.2em;
+  margin-bottom: 1em;
+  margin-top: 25%;
+  line-height: 1.2em;
+}
+
+main > div > div > p > span {
+  color: #00ffff;
+  font-size: 1.1em;
+}
+
+main > div > div > p:nth-child(2) {
+  color: #a4a6b6;
+  font-size: 1em;
+  line-height: 1.2em;
+}
+
+main > div:nth-child(5) {
+  text-align: right;
+}
+
+footer {
+  margin-top: 4em;
+}
+
+#rateUs {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5em;
+  color: white;
+  background: linear-gradient(to bottom right, #281058, #421666);
+  width: 14rem;
+  height: 4rem;
+  border: 2px solid white;
+  box-shadow: 0px 0px 20px 4px #372f7f;
+  cursor: pointer;
 }
