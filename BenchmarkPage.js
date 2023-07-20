@@ -350,7 +350,7 @@ function startTimer(timeLimit, timePassed) {
     } else {
       timePassed = timePassed += 1;
       timeLeft = timeLimit - timePassed;
-      timeGradient = (timeLeft * 360) / 30;
+      timeGradient = (timeLeft * 360) / timeLimit;
       header.innerHTML = "";
       header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
       <div id="timerContainer" style="background : conic-gradient(#00ffff ${timeGradient}deg, #98699c ${timeGradient}deg);">
