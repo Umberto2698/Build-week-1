@@ -19,6 +19,14 @@ header {
   padding-right: 14%;
   padding-left: 20%;
 }
+header > div {
+  display: inline-block;
+  margin-left: 58%;
+  border-radius: 50%;
+  width: 8em;
+  height: 8em;
+  background: conic-gradient(#98699c 120deg, #00ffff 120deg);
+}
 
 #Logo {
   width: 10rem;
@@ -29,16 +37,18 @@ header {
 .timer {
   height: 110px;
   width: 110px;
-  border: 7px solid #00ffff;
+  border: 1px solid transparent;
   border-radius: 50%;
-  margin-left: 58%;
+  margin-left: 7.6%;
+  margin-top: 7%;
   color: #e7e7eb;
   text-align: center;
-  padding: 1%;
+  padding-top: 12%;
   text-transform: uppercase;
   font-size: 0.5rem;
   margin-bottom: 0%;
   display: inline-block;
+  background-color: #3e1757;
 }
 
 .spanTimer {
