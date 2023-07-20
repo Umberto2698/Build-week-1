@@ -11,8 +11,7 @@ const questions = [
     category: "Science: Computers",
     type: "multiple",
     difficulty: "easy",
-    question:
-      "In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?",
+    question: `In the programming language Java, which of these keywords would you put on a variable to make sure it doesn't get modified?`,
     correct_answer: "Final",
     incorrect_answers: ["Static", "Private", "Public"],
   },
