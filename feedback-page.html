@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./CSS/reset.css" />
     <link rel="stylesheet" href="./CSS/font-awesome.css" />
-    <link rel="stylesheet" href="./style-feedback-page.css" />
+    <!-- <link rel="stylesheet" href="./style-feedback-page.css" /> -->
+    <link rel="stylesheet" href="style.css" />
     <title>Feedback page</title>
   </head>
-  <body>
+  <body id="feedbackBody">
     <header>
-      <img src="./assets/epicode_logo.png" alt="Logo Epicode" id="logo" />
+      <img src="./assets/epicode_logo.png" alt="Logo Epicode" id="feedbackLogo" />
     </header>
-    <main>
+    <main id="feedbackMain">
       <h1>Tell us how it's going</h1>
-      <p>
+      <p id="feedbackParagraph">
         From 0 to 10, how likely are you to recommend EPICODE <br />
         to a friend or a colleague?
       </p>
-      <div>
+      <div id="starCont">
         <img src="./assets/star.svg" alt="" class="star" />
         <img src="./assets/star.svg" alt="" class="star" /><img src="./assets/star.svg" alt="" class="star" /><img
           src="./assets/star.svg"
@@ -37,10 +38,10 @@
       <form>
         <p>Leave us an open feedback about your experience so far</p>
         <div>
-          <input type="text" placeholder="Write your comment here" required />
+          <input id="feedbackInputText" type="text" placeholder="Write your comment here" required />
         </div>
         <div>
-          <button>MORE INFO</button>
+          <button id="buttonMoreInfo">MORE INFO</button>
         </div>
       </form>
     </main>
