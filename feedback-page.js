@@ -11,11 +11,15 @@ for (let i = 1; i < Stars.length; i++) {
   };
 }
 Stars[0].onclick = () => {
-  if (Stars[0].src === "http://127.0.0.1:5500/assets/starafterclick.svg") {
-    Stars[0].src = "./assets/star.svg";
+  if (
+    Stars[0].src === "http://127.0.0.1:5500/assets/starafterclick.svg" &&
+    Stars[1].src === "http://127.0.0.1:5500/assets/starafterclick.svg"
+  ) {
     for (let k = 1; k < Stars.length; k++) {
       Stars[k].src = "./assets/star.svg";
     }
+  } else if (Stars[0].src === "http://127.0.0.1:5500/assets/starafterclick.svg") {
+    Stars[0].src = "./assets/star.svg";
   } else {
     Stars[0].src = "./assets/starafterclick.svg";
   }

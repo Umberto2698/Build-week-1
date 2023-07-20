@@ -134,6 +134,64 @@ main {
   margin: 1%;
   color: #e7e7eb;
 }
+#selectedButtonCorrect {
+  background-color: #b7008a;
+  border: 1px solid #27c70a;
+  box-shadow: 0px 0px 0px 0px #e7e7eb;
+  border-radius: 50px;
+  text-align: center;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  width: 20rem;
+  height: 4rem;
+  margin: 1%;
+  color: #e7e7eb;
+}
+#selectedButtonIncorrect {
+  background-color: #b7008a;
+  border: 1px solid #d70a0a;
+  box-shadow: 0px 0px 0px 0px #e7e7eb;
+  border-radius: 50px;
+  text-align: center;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  width: 20rem;
+  height: 4rem;
+  margin: 1%;
+  color: #e7e7eb;
+}
+#correctButton {
+  border: 1px solid #27c70a;
+  box-shadow: 0px 0px 0px 0px #e7e7eb;
+  border-radius: 50px;
+  background-color: transparent;
+  text-align: center;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  color: #e7e7eb;
+  width: 20rem;
+  height: 4rem;
+  margin: 1%;
+}
+
+#incorrectButton {
+  border: 1px solid #d70a14;
+  box-shadow: 0px 0px 0px 0px #e7e7eb;
+  border-radius: 50px;
+  background-color: transparent;
+  text-align: center;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  color: #e7e7eb;
+  width: 20rem;
+  height: 4rem;
+  margin: 1%;
+}
+
 .footerParagraph {
   font-size: 1rem;
   font-weight: 700;
