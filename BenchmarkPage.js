@@ -248,6 +248,7 @@ let timeGradient = 0;
 const easy = document.getElementById("easy");
 const medium = document.getElementById("medium");
 const hard = document.getElementById("hard");
+// funzione che verifica il click alla checkbox e quale livello è stato selezionato
 
 function goToQuizPage(submitEvent) {
   if (document.getElementById("square").checked === true) {
@@ -364,6 +365,7 @@ function formatTime(time) {
   let seconds = time % 60;
   return `${seconds}`;
 }
+// queste sono le funzioni che generano randomicamente i valori necessari
 
 let indiciIncorrectAnswers = [];
 let randomIndex = () => {
@@ -415,6 +417,16 @@ const displayAnswer = () => {
     timeLimit = 60;
   }
   let timeLeft = timeLimit;
+
+  // clearInterval blocca la funzione startTimer ed elimina tutte le parti della pagina che vanno caricate nuovamente e che
+  // verranno ricaricate con un layout leggermente diverso per mostrare all'utente la risposta corretta.
+  // nella nuova visualizzazione che ha la durata di un secondo, il bottone next question non ha le funzionalità precedenti.
+  // se l'utente non da una risposta viene registrata una stringa vuota nell'array delle risposte dell'utente.
+  // si cliclano i bottoni e si modifica la loro funzionalità per non registrare eventuali click in questa fase
+  // in questa fase si attribuiscono altri stili ai bottoni per segnalare la risposta giusta o no ciclando e facendo un if
+  // in modo da verificare il risultato e appenderli al form.
+  // viene ripristinata la struttura per passare alla domanda successiva e riprendere la visualizzazione della pagina
+
   clearInterval(timerInterval);
   main.innerHTML = "";
   question.innerHTML = "";
@@ -468,6 +480,13 @@ const displayAnswer = () => {
   indici = [];
   indiciIncorrectAnswers = [];
   buttons = [];
+  // la funzione setTimeout ricrea la visualizzazione della pagina come fa firstQuestion, restarta il timer
+  //  e aumenta il contatore della domanda corrente di 1
+  // cicla le risposte dell'utente fino alla fine della lunghezza dell'array di domande e pone le risposte giuste in un nuovo array
+  // divide da lunghezza dell'array di domande per le risposte giuste ottenendo quelle sbagliate.
+  // a questo punto calcola il risultato e la relativa percentuale dando un messaggio positivo o negativo nella chart generando la pagina
+  // dei risultati partendo dal body
+
   const nextQuestion = setTimeout(function () {
     header.innerHTML = "";
     header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
@@ -520,6 +539,12 @@ const displayAnswer = () => {
         </footer>
         </main>
         <script src="./BenchmarkPage.js"></script>`;
+
+      // se la domanda ha solo due opzioni di risposta cioè è di tipo boolean, la funzione genera solo due bottoni che
+      //  funzionano come gli altri.
+      // la funzione fa le stesse cose di prima ma per soli 2 bottoni
+      // in fondo sono stati settati 1000 millisecondi in quanto la funzione si avvierà ad un secondo dal click sul
+      // bottone next question.
     } else if (questions[questionNumber].type === "boolean") {
       main.innerHTML = "";
       question.innerHTML = "";
@@ -631,6 +656,8 @@ const displayAnswer = () => {
   }, 1000);
 };
 
+// setta il time limit in base alla difficoltà,svuota il body e lo riempie con i pezzi di codice
+
 const firstQuestion = () => {
   let timeLimit = 0;
   if (easy.checked === true) {
@@ -655,6 +682,7 @@ const firstQuestion = () => {
       </p>
     </div>
   </div>`;
+  // attiva il timer e inserisce le domande dinamicamente basandosi sull'array.
   startTimer(timeLimit, timePassed);
   const h1 = document.createElement("h1");
   h1.classList.add("title");
@@ -674,6 +702,15 @@ const firstQuestion = () => {
       lastClickedText.splice(questionNumber, 1, last);
     }
   });
+  // crea bottoni e fornisce ID e li inserisce in un array vuoto
+  // chiama la funzione randomPosition 4 volte per generare randomicamente i numeri da 0 a 3 e li inserisce in un array vuoto
+  // questo significa che la posizione delle risposte nell'array è casuale
+  // l'altro for loop chiama la funzione randomIndex che genera numeri da 0 a 2 che inserire randomicamente le
+  // 3 opzioni di risposta errate
+  // l'ultimo for loop verifica l'array di bottoni e verifica quello vuoto assegnando l'opzione di risposta corretta
+  // si appendono al form con appendchild.Question è un div inizialmente vuoto che viene riempito con appendchild
+  // il bottore next question serve all'utente per inviare la risposta scelta e viene appeso al footer con appendchild
+
   for (let i = 0; i < 4; i++) {
     const button = document.createElement("button");
     button.id = "answerButton";
