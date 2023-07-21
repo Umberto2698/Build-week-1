@@ -495,3 +495,8 @@ li strong {
   width: 10rem;
   cursor: pointer;
 }
+
+i {
+  margin-inline: 1.1%;
+  margin-bottom: 5%;
+}
