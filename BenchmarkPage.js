@@ -1,4 +1,164 @@
-const questions = [
+const allQuestions = [
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "hard",
+    question: "Which of the following is the oldest of these computers by release date?",
+    correct_answer: "TRS-80",
+    incorrect_answers: ["Commodore 64", "ZX Spectrum", "Apple 3"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "hard",
+    question: "What internet protocol was documented in RFC 1459?",
+    correct_answer: "IRC",
+    incorrect_answers: ["HTTP", "HTTPS", "FTP"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "hard",
+    question: `What was the first company to use the term "Golden Master"?`,
+    correct_answer: "Apple",
+    incorrect_answers: ["IBM", "Microsoft", "Google"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "hard",
+    question: `Released in 2001, the first edition of Apple's Mac OS X operating system (version 10.0) was given what animal code name?`,
+    correct_answer: "Cheetah",
+    incorrect_answers: ["Puma", "Tiger", "Leopard"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "hard",
+    question: "Dutch computer scientist Mark Overmars is known for creating which game development engine?",
+    correct_answer: "Game Maker",
+    incorrect_answers: ["Stencyl", "Construct", "Torque 2D"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "hard",
+    question: `Who invented the "Spanning Tree Protocol"?`,
+    correct_answer: "Radia Perlman",
+    incorrect_answers: ["Paul Vixie", "Vint Cerf", "Michael Roberts"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "hard",
+    question: "Which of the following computer components can be built using only NAND gates?",
+    correct_answer: "ALU",
+    incorrect_answers: ["CPU", "RAM", "Register"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "hard",
+    question: "What is the codename of the eighth generation Intel Core micro-architecture launched in October 2017?",
+    correct_answer: "Coffee Lake",
+    incorrect_answers: ["Sandy Bridge", "Skylake", "Broadwell"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "hard",
+    question: `Lenovo acquired IBM's personal computer division, including the ThinkPad line of laptops and tablets, in what year?`,
+    correct_answer: "2005",
+    incorrect_answers: ["1999", "2002", "2008"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "hard",
+    question: "Who is the founder of Palantir?",
+    correct_answer: "Peter Thiel",
+    incorrect_answers: ["Mark Zuckerberg", "Marc Benioff", "Jack Dorsey"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "medium",
+    question: "Whistler was the codename of this Microsoft Operating System.",
+    correct_answer: "Windows XP",
+    incorrect_answers: ["Windows 2000", "Windows 7", "Windows 95"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "medium",
+    question: "On which computer hardware device is the BIOS chip located?",
+    correct_answer: "Motherboard",
+    incorrect_answers: ["Hard Disk Drive", "Central Processing Unit", "Graphics Processing Unit"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "medium",
+    question: `Nvidia's headquarters are based in which Silicon Valley city?`,
+    correct_answer: "Santa Clara",
+    incorrect_answers: ["Palo Alto", "Cupertino", "Mountain View"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "medium",
+    question: "In the server hosting industry IaaS stands for...",
+    correct_answer: "Infrastructure as a Service",
+    incorrect_answers: ["Internet as a Service", "Internet and a Server", "Infrastructure as a Server"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "medium",
+    question: `In the programming language "Python", which of these statements would display the string "Hello World" correctly?`,
+    correct_answer: `print("Hello World")`,
+    incorrect_answers: [`console.log("Hello World")`, `echo "Hello World"`, `printf("Hello World")`],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "medium",
+    question: "In computing terms, typically what does CLI stand for?",
+    correct_answer: "Command Line Interface",
+    incorrect_answers: ["Common Language Input", "Control Line Interface", "Common Language Interface"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "medium",
+    question: "Which of the following is a personal computer made by the Japanese company Fujitsu?",
+    correct_answer: "FM-7",
+    incorrect_answers: ["PC-9801", "Xmillennium ", "MSX"],
+  },
+  {
+    category: "Science: Computers",
+    type: "boolean",
+    difficulty: "medium",
+    question: `It's not possible to format a write-protected DVD-R Hard Disk.`,
+    correct_answer: "True",
+    incorrect_answers: ["False"],
+  },
+  {
+    category: "Science: Computers",
+    type: "boolean",
+    difficulty: "medium",
+    question: "Android versions are named in alphabetical order.",
+    correct_answer: "True",
+    incorrect_answers: ["False"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "medium",
+    question: "Which programming language was developed by Sun Microsystems in 1995?",
+    correct_answer: "Java",
+    incorrect_answers: ["Python", "Solaris OS", "C++"],
+  },
   {
     category: "Science: Computers",
     type: "multiple",
@@ -11,8 +171,7 @@ const questions = [
     category: "Science: Computers",
     type: "multiple",
     difficulty: "easy",
-    question:
-      "In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?",
+    question: `In the programming language Java, which of these keywords would you put on a variable to make sure it doesn't get modified?`,
     correct_answer: "Final",
     incorrect_answers: ["Static", "Private", "Public"],
   },
@@ -82,14 +241,47 @@ const questions = [
   },
 ];
 
-const header = document.getElementsByTagName("header")[0];
+let questions = [];
+let timePassed = 0;
+let timeGradient = 0;
+
+const easy = document.getElementById("easy");
+const medium = document.getElementById("medium");
+const hard = document.getElementById("hard");
+
+function goToQuizPage(submitEvent) {
+  if (document.getElementById("square").checked === true) {
+    if (easy.checked === true) {
+      for (let i = 0; i < allQuestions.length; i++) {
+        if (allQuestions[i].difficulty === "easy") {
+          questions.push(allQuestions[i]);
+        }
+      }
+    } else if (medium.checked === true) {
+      for (let i = 0; i < allQuestions.length; i++) {
+        if (allQuestions[i].difficulty === "medium") {
+          questions.push(allQuestions[i]);
+        }
+      }
+    } else if (hard.checked === true) {
+      for (let i = 0; i < allQuestions.length; i++) {
+        if (allQuestions[i].difficulty === "hard") {
+          questions.push(allQuestions[i]);
+        }
+      }
+    }
+    firstQuestion();
+  }
+}
+
+const header = document.createElement("header");
 const body = document.getElementsByTagName("body")[0];
-const main = document.getElementsByTagName("main")[0];
+const main = document.createElement("main");
 const question = document.createElement("div");
 question.classList.add("normal");
 const br = document.createElement("br");
 
-const footer = document.getElementsByTagName("footer")[0];
+const footer = document.createElement("footer");
 const numberQuestion = document.createElement("p");
 numberQuestion.classList.add("footerParagraph");
 
@@ -137,188 +329,9 @@ promotions / spam folder)`;
 }
 
 //Funzionalità del timer dinamico
-let timeLimit = 30;
-let timePassed = 0;
-let timeLeft = timeLimit;
-let timeGradient = 0;
-
-//const div = document.getElementsByClassName("timer")[0];
-//const p = document.getElementById("timerStamp");
 
 function onTimesUp() {
-  timeLimit = timeLimit;
-  header.innerHTML = "";
-  header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
-      <div id="timerContainer" style="background : conic-gradient(#00ffff ${0}deg, #98699c ${0}deg);">
-        <div class="timer">
-          <p id="timerStamp">
-            second <br />
-            <span class="spanTimer">${0}</span>
-            <br />
-            remaning
-          </p>
-        </div>
-      </div>`;
-  function time0() {
-    questionNumber++;
-    if (questionNumber === questions.length) {
-      for (let i = 0; i < questions.length; i++) {
-        correctQuestionsAnswer.push(questions[i].correct_answer);
-        if (correctQuestionsAnswer[i] === lastClickedText[i]) {
-          correctAnswer += 1;
-        }
-      }
-      incorrectAnswer = questions.length - correctAnswer;
-      let correctGradient = (correctAnswer * 360) / 10;
-      corrPercentage();
-      incorrPercentage();
-      chartText();
-      body.innerHTML = `<div id="logoContainer"><img src="./assets/epicode_logo.png" alt="Logo EPICODE" class="logo" /></div>
-      <main>
-        <h1>Results</h1>
-        <h2>The summary of your answers:</h2>
-        <div id="correctAnswer">
-          <h3>Correct</h3>
-          <h4>${correctH4.innerText}</h4>
-          <h5>${correctH5.innerText}</h5>
-        </div>
-        <div style="background: conic-gradient(#00ffff ${correctGradient}deg, #c2128d ${correctGradient}deg);">
-          <div id="chart">
-          <p>${pText.innerHTML}</p>
-          <p>${secondP.innerHTML}</p>
-          </div>
-        </div>
-        <div id="incorrectAnswer">
-          <h3>Wrong</h3>
-          <h4>${incorrectH4.innerText}</h4>
-          <h5>${incorrectH5.innerText}</h5>
-        </div>
-        <footer>
-          <a href="feedback-page.html"><button id="rateUs">RATE US</button></a>
-        </footer>
-      </main>
-      <script src="./BenchmarkPage.js"></script>`;
-    } else {
-      if (questions[questionNumber].correct_answer === "False" || questions[questionNumber].correct_answer === "True") {
-        startTimer(timeLimit, timePassed);
-        main.innerHTML = "";
-        question.innerHTML = "";
-        const h1 = document.createElement("h1");
-        h1.classList.add("title");
-        h1.innerText = `${questions[questionNumber].question}`;
-        const form = document.createElement("form");
-        form.id = "formAnswer";
-        form.addEventListener("click", (clicco) => {
-          clicco.preventDefault();
-          for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
-            if (clicco.currentTarget.childNodes[i].type !== undefined) {
-              clicco.currentTarget.childNodes[i].id = "answerButton";
-            }
-          }
-          if (clicco.target.tagName === "BUTTON") {
-            clicco.target.id = "selectedButton";
-            let last = clicco.target.innerText;
-            lastClickedText.splice(questionNumber, 1, last);
-          }
-        });
-        let index = 0;
-        for (let i = 0; i < 2; i++) {
-          const button = document.createElement("button");
-          button.id = "answerButton";
-          button.style.type = "submit";
-          button.style.cursor = "pointer";
-          buttons.push(button);
-          randomPositionTrueFalse();
-        }
-        buttons[indici[0]].innerText = `${questions[questionNumber].incorrect_answers[index]}`;
-        for (let i = 0; i < buttons.length; i++) {
-          if (buttons[i].innerText === "") {
-            buttons[i].innerText = `${questions[questionNumber].correct_answer}`;
-          }
-        }
-        form.appendChild(buttons[0]);
-        form.appendChild(buttons[1]);
-        question.appendChild(h1);
-        question.appendChild(form);
-        main.appendChild(question);
-        const next = document.createElement("button");
-        next.id = "rateUs";
-        next.innerText = "Next question";
-        next.style.cursor = "pointer";
-        next.onclick = nextQuestion;
-        footer.innerHTML = "";
-        footer.appendChild(next);
-        numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
-        footer.appendChild(numberQuestion);
-        body.appendChild(footer);
-        indici = [];
-        indiciIncorrectAnswers = [];
-        buttons = [];
-      } else {
-        startTimer(timeLimit, timePassed);
-        main.innerHTML = "";
-        question.innerHTML = "";
-        const h1 = document.createElement("h1");
-        h1.classList.add("title");
-        h1.innerText = `${questions[questionNumber].question}`;
-        const form = document.createElement("form");
-        form.id = "formAnswer";
-        form.addEventListener("click", (clicco) => {
-          clicco.preventDefault();
-          for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
-            if (clicco.currentTarget.childNodes[i].type !== undefined) {
-              clicco.currentTarget.childNodes[i].id = "answerButton";
-            }
-          }
-          if (clicco.target.tagName === "BUTTON") {
-            clicco.target.id = "selectedButton";
-            let last = clicco.target.innerText;
-            lastClickedText.splice(questionNumber, 1, last);
-          }
-        });
-        for (let i = 0; i < 4; i++) {
-          const button = document.createElement("button");
-          button.id = "answerButton";
-          button.style.type = "submit";
-          button.style.cursor = "pointer";
-          buttons.push(button);
-          randomPosition();
-        }
-        for (let i = 0; i < 3; i++) {
-          let index = randomIndex();
-          buttons[indici[i]].innerText = `${questions[questionNumber].incorrect_answers[index]}`;
-        }
-        for (let i = 0; i < buttons.length; i++) {
-          if (buttons[i].innerText === "") {
-            buttons[i].innerText = `${questions[questionNumber].correct_answer}`;
-          }
-        }
-        form.appendChild(buttons[0]);
-        form.appendChild(buttons[1]);
-        form.appendChild(br);
-        form.appendChild(buttons[2]);
-        form.appendChild(buttons[3]);
-        question.appendChild(h1);
-        question.appendChild(form);
-        main.appendChild(question);
-        const next = document.createElement("button");
-        next.id = "rateUs";
-        next.innerText = "Next question";
-        next.style.cursor = "pointer";
-        next.onclick = nextQuestion;
-        footer.innerHTML = "";
-        footer.appendChild(next);
-        numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
-        footer.appendChild(numberQuestion);
-        body.appendChild(footer);
-      }
-      indici = [];
-      indiciIncorrectAnswers = [];
-      buttons = [];
-    }
-  }
-  lastClickedText.push("");
-  time0();
+  displayAnswer();
 }
 
 function startTimer(timeLimit, timePassed) {
@@ -328,9 +341,11 @@ function startTimer(timeLimit, timePassed) {
       clearInterval(timerInterval);
       onTimesUp();
     } else {
-      timeGradient = (timeLeft * 360) / 30;
+      timePassed = timePassed += 1;
+      timeLeft = timeLimit - timePassed;
+      timeGradient = (timeLeft * 360) / timeLimit;
       header.innerHTML = "";
-      header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
+      header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
       <div id="timerContainer" style="background : conic-gradient(#00ffff ${timeGradient}deg, #98699c ${timeGradient}deg);">
         <div class="timer">
           <p id="timerStamp">
@@ -341,8 +356,6 @@ function startTimer(timeLimit, timePassed) {
           </p>
         </div>
       </div>`;
-      timePassed = timePassed += 1;
-      timeLeft = timeLimit - timePassed;
     }
   }, 1000);
 }
@@ -392,203 +405,257 @@ let randomPositionTrueFalse = () => {
   }
 };
 
-const nextQuestion = (submitEvent) => {
-  clearInterval(timerInterval);
-  submitEvent.preventDefault();
-  header.innerHTML = "";
-  header.innerHTML = `<img id="Logo" src="assets/epicode_logo.png" alt="Logo epicode" />
-      <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
-        <div class="timer">
-          <p id="timerStamp">
-            second <br />
-            <span class="spanTimer">${timeLeft}</span>
-            <br />
-            remaning
-          </p>
-        </div>
-      </div>`;
-  startTimer(timeLimit, timePassed);
-  questionNumber++;
-  if (questionNumber === questions.length) {
-    for (let i = 0; i < questions.length; i++) {
-      correctQuestionsAnswer.push(questions[i].correct_answer);
-      if (correctQuestionsAnswer[i] === lastClickedText[i]) {
-        correctAnswer += 1;
-      }
-    }
-    incorrectAnswer = questions.length - correctAnswer;
-    let correctGradient = (correctAnswer * 360) / 10;
-    corrPercentage();
-    incorrPercentage();
-    chartText();
-    body.innerHTML = `<div id="logoContainer"><img src="./assets/epicode_logo.png" alt="Logo EPICODE" class="logo" /></div>
-      <main>
-        <h1>Results</h1>
-        <h2>The summary of your answers:</h2>
-        <div id="correctAnswer">
-          <h3>Correct</h3>
-          <h4>${correctH4.innerText}</h4>
-          <h5>${correctH5.innerText}</h5>
-        </div>
-        <div style="background: conic-gradient(#00ffff ${correctGradient}deg, #c2128d ${correctGradient}deg);">
-          <div id="chart">
-          <p>${pText.innerHTML}</p>
-          <p>${secondP.innerHTML}</p>
-          </div>
-        </div>
-        <div id="incorrectAnswer">
-          <h3>Wrong</h3>
-          <h4>${incorrectH4.innerText}</h4>
-          <h5>${incorrectH5.innerText}</h5>
-        </div>
-        <footer>
-          <a href="feedback-page.html"><button id="rateUs">RATE US</button></a>
-        </footer>
-      </main>
-      <script src="./BenchmarkPage.js"></script>`;
-  } else if (
-    questions[questionNumber].correct_answer === "False" ||
-    questions[questionNumber].correct_answer === "True"
-  ) {
-    main.innerHTML = "";
-    question.innerHTML = "";
-    const h1 = document.createElement("h1");
-    h1.classList.add("title");
-    h1.innerText = `${questions[questionNumber].question}`;
-    const form = document.createElement("form");
-    form.id = "formAnswer";
-    form.addEventListener("click", (clicco) => {
-      clicco.preventDefault();
-      for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
-        if (clicco.currentTarget.childNodes[i].type !== undefined) {
-          clicco.currentTarget.childNodes[i].id = "answerButton";
-        }
-      }
-      if (clicco.target.tagName === "BUTTON") {
-        clicco.target.id = "selectedButton";
-        let last = clicco.target.innerText;
-        lastClickedText.splice(questionNumber, 1, last);
-      }
-    });
-    let index = 0;
-    for (let i = 0; i < 2; i++) {
-      const button = document.createElement("button");
-      button.id = "answerButton";
-      button.style.type = "submit";
-      button.style.cursor = "pointer";
-      buttons.push(button);
-      randomPositionTrueFalse();
-    }
-    buttons[indici[0]].innerText = `${questions[questionNumber].incorrect_answers[index]}`;
-    for (let i = 0; i < buttons.length; i++) {
-      if (buttons[i].innerText === "") {
-        buttons[i].innerText = `${questions[questionNumber].correct_answer}`;
-      }
-    }
-    form.appendChild(buttons[0]);
-    form.appendChild(buttons[1]);
-    question.appendChild(h1);
-    question.appendChild(form);
-    main.appendChild(question);
-    const next = document.createElement("button");
-    next.id = "rateUs";
-    next.innerText = "Next question";
-    next.style.cursor = "pointer";
-    next.onclick = nextQuestion;
-    footer.innerHTML = "";
-    footer.appendChild(next);
-    numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
-    footer.appendChild(numberQuestion);
-    body.appendChild(footer);
-    indici = [];
-    indiciIncorrectAnswers = [];
-    buttons = [];
-  } else {
-    main.innerHTML = "";
-    question.innerHTML = "";
-    const h1 = document.createElement("h1");
-    h1.classList.add("title");
-    h1.innerText = `${questions[questionNumber].question}`;
-    const form = document.createElement("form");
-    form.id = "formAnswer";
-    form.addEventListener("click", (clicco) => {
-      clicco.preventDefault();
-      for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
-        if (clicco.currentTarget.childNodes[i].type !== undefined) {
-          clicco.currentTarget.childNodes[i].id = "answerButton";
-        }
-      }
-      if (clicco.target.tagName === "BUTTON") {
-        clicco.target.id = "selectedButton";
-        let last = clicco.target.innerText;
-        lastClickedText.splice(questionNumber, 1, last);
-      }
-    });
-    for (let i = 0; i < 4; i++) {
-      const button = document.createElement("button");
-      button.id = "answerButton";
-      button.style.type = "submit";
-      button.style.cursor = "pointer";
-      buttons.push(button);
-      randomPosition();
-    }
-    for (let i = 0; i < 3; i++) {
-      let index = randomIndex();
-      buttons[indici[i]].innerText = `${questions[questionNumber].incorrect_answers[index]}`;
-    }
-    for (let i = 0; i < buttons.length; i++) {
-      if (buttons[i].innerText === "") {
-        buttons[i].innerText = `${questions[questionNumber].correct_answer}`;
-      }
-    }
-    form.appendChild(buttons[0]);
-    form.appendChild(buttons[1]);
-    form.appendChild(br);
-    form.appendChild(buttons[2]);
-    form.appendChild(buttons[3]);
-    question.appendChild(h1);
-    question.appendChild(form);
-    main.appendChild(question);
-    const next = document.createElement("button");
-    next.id = "rateUs";
-    next.innerText = "Next question";
-    next.style.cursor = "pointer";
-    next.onclick = nextQuestion;
-    footer.innerHTML = "";
-    footer.appendChild(next);
-    numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
-    footer.appendChild(numberQuestion);
-    body.appendChild(footer);
+const displayAnswer = () => {
+  let timeLimit = 0;
+  if (easy.checked === true) {
+    timeLimit = 30;
+  } else if (medium.checked === true) {
+    timeLimit = 40;
+  } else if (hard.checked === true) {
+    timeLimit = 60;
   }
+  let timeLeft = timeLimit;
+  clearInterval(timerInterval);
+  main.innerHTML = "";
+  question.innerHTML = "";
+  footer.innerHTML = "";
+  const next = document.createElement("button");
+  next.id = "rateUs";
+  next.innerText = "Next question";
+  next.style.cursor = "pointer";
+  footer.appendChild(next);
+  numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
+  footer.appendChild(numberQuestion);
+  const h1 = document.createElement("h1");
+  h1.classList.add("title");
+  h1.innerText = `${questions[questionNumber].question}`;
+  const form = document.createElement("form");
+  form.id = "formAnswer";
+  if (lastClickedText[questionNumber] === undefined) {
+    lastClickedText.push("");
+  }
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].type = "button";
+    if (i === 2) {
+      form.appendChild(br);
+    }
+    if (
+      buttons[i].innerText === lastClickedText[questionNumber] &&
+      buttons[i].innerText === questions[questionNumber].correct_answer
+    ) {
+      buttons[i].id = "selectedButtonCorrect";
+    } else if (
+      (buttons[i].innerText === lastClickedText[questionNumber] &&
+        buttons[i].innerText === questions[questionNumber].incorrect_answers[0]) ||
+      (buttons[i].innerText === lastClickedText[questionNumber] &&
+        buttons[i].innerText === questions[questionNumber].incorrect_answers[1]) ||
+      (buttons[i].innerText === lastClickedText[questionNumber] &&
+        buttons[i].innerText === questions[questionNumber].incorrect_answers[2])
+    ) {
+      buttons[i].id = "selectedButtonIncorrect";
+    } else if (buttons[i].innerText === questions[questionNumber].correct_answer) {
+      buttons[i].id = "correctButton";
+    } else {
+      buttons[i].id = "incorrectButton";
+    }
+    form.appendChild(buttons[i]);
+  }
+  question.appendChild(h1);
+  question.appendChild(form);
+  main.appendChild(question);
+  body.appendChild(main);
+  body.appendChild(footer);
   indici = [];
   indiciIncorrectAnswers = [];
   buttons = [];
-  lastClickedText.push("");
+  const nextQuestion = setTimeout(function () {
+    header.innerHTML = "";
+    header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
+      <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
+      <div class="timer">
+      <p id="timerStamp">
+      second <br />
+      <span class="spanTimer">${timeLeft}</span>
+      <br />
+      remaning
+      </p>
+      </div>
+      </div>`;
+    startTimer(timeLimit, timePassed);
+    questionNumber++;
+    if (questionNumber === questions.length) {
+      for (let i = 0; i < questions.length; i++) {
+        correctQuestionsAnswer.push(questions[i].correct_answer);
+        if (correctQuestionsAnswer[i] === lastClickedText[i]) {
+          correctAnswer += 1;
+        }
+      }
+      incorrectAnswer = questions.length - correctAnswer;
+      let correctGradient = (correctAnswer * 360) / questions.length;
+      corrPercentage();
+      incorrPercentage();
+      chartText();
+      body.innerHTML = `<div id="logoContainer"><img src="./assets/epicode_logo.png" alt="Logo EPICODE" class="logo" /></div>
+        <main>
+        <h1>Results</h1>
+        <h2>The summary of your answers:</h2>
+        <div id="correctAnswer">
+        <h3>Correct</h3>
+        <h4>${correctH4.innerText}</h4>
+        <h5>${correctH5.innerText}</h5>
+        </div>
+        <div style="background-image: conic-gradient(#00ffff ${correctGradient}deg, #c2128d ${correctGradient}deg); box-shadow: 0px 0px 20px 10px #090D2C;">
+        <div id="chart">
+        <p>${pText.innerHTML}</p>
+        <p>${secondP.innerHTML}</p>
+        </div>
+        </div>
+        <div id="incorrectAnswer">
+        <h3>Wrong</h3>
+        <h4>${incorrectH4.innerText}</h4>
+        <h5>${incorrectH5.innerText}</h5>
+        </div>
+        <footer>
+        <a href="feedback-page.html"><button id="rateUs">RATE US</button></a>
+        </footer>
+        </main>
+        <script src="./BenchmarkPage.js"></script>`;
+    } else if (questions[questionNumber].type === "boolean") {
+      main.innerHTML = "";
+      question.innerHTML = "";
+      const h1 = document.createElement("h1");
+      h1.classList.add("title");
+      h1.innerText = `${questions[questionNumber].question}`;
+      const form = document.createElement("form");
+      form.id = "formAnswer";
+      form.addEventListener("click", (clicco) => {
+        clicco.preventDefault();
+        for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
+          if (clicco.currentTarget.childNodes[i].type !== undefined) {
+            clicco.currentTarget.childNodes[i].id = "answerButton";
+          }
+        }
+        if (clicco.target.tagName === "BUTTON") {
+          clicco.target.id = "selectedButton";
+          let last = clicco.target.innerText;
+          lastClickedText.splice(questionNumber, 1, last);
+        }
+      });
+      let index = 0;
+      for (let i = 0; i < 2; i++) {
+        const button = document.createElement("button");
+        button.id = "answerButton";
+        button.style.type = "submit";
+        button.style.cursor = "pointer";
+        buttons.push(button);
+        randomPositionTrueFalse();
+      }
+      buttons[indici[0]].innerText = `${questions[questionNumber].incorrect_answers[index]}`;
+      for (let i = 0; i < buttons.length; i++) {
+        if (buttons[i].innerText === "") {
+          buttons[i].innerText = `${questions[questionNumber].correct_answer}`;
+        }
+      }
+      form.appendChild(buttons[0]);
+      form.appendChild(buttons[1]);
+      question.appendChild(h1);
+      question.appendChild(form);
+      main.appendChild(question);
+      const next = document.createElement("button");
+      next.id = "rateUs";
+      next.innerText = "Next question";
+      next.style.cursor = "pointer";
+      next.onclick = displayAnswer;
+      footer.innerHTML = "";
+      footer.appendChild(next);
+      numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
+      footer.appendChild(numberQuestion);
+      body.appendChild(footer);
+    } else {
+      main.innerHTML = "";
+      question.innerHTML = "";
+      const h1 = document.createElement("h1");
+      h1.classList.add("title");
+      h1.innerText = `${questions[questionNumber].question}`;
+      const form = document.createElement("form");
+      form.id = "formAnswer";
+      form.addEventListener("click", (clicco) => {
+        clicco.preventDefault();
+        for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
+          if (clicco.currentTarget.childNodes[i].type !== undefined) {
+            clicco.currentTarget.childNodes[i].id = "answerButton";
+          }
+        }
+        if (clicco.target.tagName === "BUTTON") {
+          clicco.target.id = "selectedButton";
+          let last = clicco.target.innerText;
+          lastClickedText.splice(questionNumber, 1, last);
+        }
+      });
+      for (let i = 0; i < 4; i++) {
+        const button = document.createElement("button");
+        button.id = "answerButton";
+        button.style.type = "submit";
+        button.style.cursor = "pointer";
+        buttons.push(button);
+        randomPosition();
+      }
+      for (let i = 0; i < 3; i++) {
+        let index = randomIndex();
+        buttons[indici[i]].innerText = `${questions[questionNumber].incorrect_answers[index]}`;
+      }
+      for (let i = 0; i < buttons.length; i++) {
+        if (buttons[i].innerText === "") {
+          buttons[i].innerText = `${questions[questionNumber].correct_answer}`;
+        }
+      }
+      form.appendChild(buttons[0]);
+      form.appendChild(buttons[1]);
+      form.appendChild(br);
+      form.appendChild(buttons[2]);
+      form.appendChild(buttons[3]);
+      question.appendChild(h1);
+      question.appendChild(form);
+      main.appendChild(question);
+      const next = document.createElement("button");
+      next.id = "rateUs";
+      next.innerText = "Next question";
+      next.style.cursor = "pointer";
+      next.onclick = displayAnswer;
+      footer.innerHTML = "";
+      footer.appendChild(next);
+      numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
+      footer.appendChild(numberQuestion);
+      body.appendChild(footer);
+    }
+  }, 1000);
 };
 
-const img = document.createElement("img");
-img.id = "Logo";
-img.src = "assets/epicode_logo.png";
-
 const firstQuestion = () => {
-  header.innerHTML = "";
-  const timerContainer = document.createElement("div");
-  timerContainer.innerHTML = "";
-  timerContainer.id = "timerContainer";
-  timerContainer.style = "background : conic-gradient(#98699c 0deg, #00ffff 0deg);";
-  const div = document.createElement("div");
-  div.innerHTML = "";
-  div.classList.add("timer");
-  const p = document.createElement("p");
-  p.innerHTML = `second <br /> <span class="spanTimer">${timeLeft}</span> <br /> remaning`;
-  p.id = "timerStamp";
-  div.appendChild(p);
-  timerContainer.appendChild(div);
-  header.appendChild(img);
-  header.appendChild(timerContainer);
+  let timeLimit = 0;
+  if (easy.checked === true) {
+    timeLimit = 30;
+    let timeLeft = timeLimit;
+  } else if (medium.checked === true) {
+    timeLimit = 40;
+    let timeLeft = timeLimit;
+  } else if (hard.checked === true) {
+    timeLimit = 60;
+    let timeLeft = timeLimit;
+  }
+  body.innerHTML = "";
+  header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
+  <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
+    <div class="timer">
+      <p id="timerStamp">
+        second <br />
+        <span class="spanTimer">${timeLimit}</span>
+        <br />
+        remaning
+      </p>
+    </div>
+  </div>`;
   startTimer(timeLimit, timePassed);
-  main.innerHTML = "";
-  question.innerHTML = "";
   const h1 = document.createElement("h1");
   h1.classList.add("title");
   h1.innerText = `${questions[questionNumber].question}`;
@@ -636,15 +703,12 @@ const firstQuestion = () => {
   next.id = "rateUs";
   next.innerText = "Next question";
   next.style.cursor = "pointer";
-  next.onclick = nextQuestion;
+  next.onclick = displayAnswer;
   footer.innerHTML = "";
   footer.appendChild(next);
   numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
   footer.appendChild(numberQuestion);
+  body.appendChild(header);
+  body.appendChild(main);
   body.appendChild(footer);
-  indici = [];
-  indiciIncorrectAnswers = [];
-  buttons = [];
-  lastClickedText.push("");
 };
-firstQuestion();
