@@ -37,38 +37,16 @@ const moreInfoButton = document.getElementById("buttonMoreInfo");
 moreInfoButton.addEventListener("click", (submitEvent) => {
   submitEvent.preventDefault();
   let counterStar = 0;
-  // const sadFace = document.createElement("i");
-  // sadFace.classList.toggle("far fa-frown");
-  // sadFace.style = "color: #C0008E";
-  // console.log(sadFace);
-  // const happyFace = document.createElement("i");
-  // happyFace.classList.add("far fa-smile-beam");
-  // happyFace.style = "color: #00FFFF";
   for (let i = 0; i < Stars.length; i++) {
     if (Stars[i].src === "http://127.0.0.1:5500/assets/starafterclick.svg") {
       counterStar++;
     }
   }
-  // h3.appendChild(sadFace);
   if (counterStar === 0) {
     main.innerHTML = "";
     h3.innerHTML = `<i class="far fa-frown" style="color: #C0008E"></i> <i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i> <i class="far fa-smile-beam" style="color: #00FFFF"></i>  <br> </> We are truly sorry for your bad experience, we'll make sure to follow your feedback.`;
     div.appendChild(h3);
     main.appendChild(div);
-    // for (let i = 0; i < 10; i++) {
-    //   const circle = document.createElement("i");
-    //   //circle.classList.add("fas fa-circle");
-    //   if (counterStar >= 0) {
-    //     circle.style = "color: #C0008E";
-    //     h3.appendChild(circle);
-    //     counterStar--;
-    //   } else {
-    //     circle.style = "color: #C0008E";
-    //     h3.appendChild(circle);
-    //   }
-    // }
-    // h3.appendChild(happyFace);
-    // h3.appendChild(br);
   } else if (counterStar === 1) {
     main.innerHTML = "";
     h3.innerHTML = `<i class="far fa-frown" style="color: #C0008E"></i> <i class="fas fa-circle" style="color: #C0008E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i><i class="fas fa-circle" style="color: #121B5E"></i> <i class="far fa-smile-beam" style="color: #00FFFF"></i>  <br> </> We are truly sorry for your bad experience, we'll make sure to follow your feedback.`;
