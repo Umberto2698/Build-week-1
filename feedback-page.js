@@ -1,8 +1,7 @@
 const main = document.getElementsByTagName("main")[0];
-const p = document.createElement("p");
+const h3 = document.createElement("h3");
 const div = document.createElement("div");
-div.style = "margin-top: 35%;";
-p.id = "feedbackParagraph";
+div.style = "margin-top: 25%;";
 
 const Stars = document.getElementsByClassName("star");
 let glowingStars = [];
@@ -43,22 +42,21 @@ moreInfoButton.addEventListener("click", (submitEvent) => {
   submitEvent.preventDefault();
   if (glowingStars.length >= 0 && glowingStars.length < 7) {
     main.innerHTML = "";
-    p.innerText = "We are truly sorry for your bad experience, we'll make sure to follow your feedback.";
+    h3.innerHTML = `<i class="far fa-frown" style="color: #FF1200"></i> <br> </> We are truly sorry for your bad experience, we'll make sure to follow your feedback.`;
 
-    div.appendChild(p);
+    div.appendChild(h3);
     main.appendChild(div);
   } else if (glowingStars.length >= 7 && glowingStars.length < 9) {
     main.innerHTML = "";
-    p.innerText =
-      "Thanks for the good rating! We'll make sure to follow your feedback to improve the quality of our products.";
+    h3.innerHTML = `<i class="far fa-smile-beam" style="color: #BFFF10"></i> <br> </> Thanks for the good rating! We'll make sure to follow your feedback to improve the quality of our services.`;
 
-    div.appendChild(p);
+    div.appendChild(h3);
     main.appendChild(div);
   } else {
     main.innerHTML = "";
-    p.innerText = "Thanks a lot for the excelent rating! We'll make sure to mantain the quality of our products.";
+    h3.innerHTML = `<i class="far fa-laugh-beam" style="color: #05FF04"></i> <br> </> Thanks a lot for the excelent rating! We'll make sure to mantain the quality of our services.`;
 
-    div.appendChild(p);
+    div.appendChild(h3);
     main.appendChild(div);
   }
 });
