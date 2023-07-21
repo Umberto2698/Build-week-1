@@ -14,12 +14,14 @@ body {
   font-family: "Outfit", sans-serif;
 }
 .welcomeBigContainer {
-  padding-left: 20%;
+  padding-left: 27%;
+  margin-top: 2%;
 }
+
 #welcomeHeader {
-  margin: 5%;
+  margin: 0%;
   padding-right: 0;
-  padding-left: 0;
+  padding-left: 0%;
 }
 header {
   margin: 5%;
@@ -49,15 +51,16 @@ header {
 }
 
 #welcomeMain {
-  margin: 5%;
+  margin: 0%;
   text-align: left;
 }
 
 .welcomeH1 {
   color: #e7e7eb;
-  font-size: 4rem;
+  font-size: 7rem;
   margin-bottom: 4%;
   line-height: 75%;
+  font-weight: 400;
 }
 
 .timer {
@@ -326,12 +329,12 @@ footer {
   text-align: center;
   font-family: "Outfit", sans-serif;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 1.8em;
   color: #0b113b;
-  width: 13rem;
-  height: 3rem;
+  width: 16rem;
+  height: 4.5rem;
   border: none;
-  box-shadow: 0px 0px 20px 2px #00ffff;
+  box-shadow: 0px 0px 20px 7px #00ffff;
   margin-top: 3em;
 }
 /* Stile relativo alla checkbox della pagina welcome */
@@ -342,11 +345,12 @@ footer {
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.3rem;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  margin-right: 0;
 }
 
 .containerLabel input {
@@ -391,20 +395,20 @@ footer {
 
 /* Stili relativi al main della pagina welcome */
 .purpleText {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #c2128d;
   margin-bottom: 1%;
 }
 .paragraph {
-  font-size: 1rem;
+  font-size: 1.4rem;
   color: #e7e7eb;
   margin-bottom: 4%;
   font-weight: 300;
   line-height: normal;
 }
 ul {
-  font-size: 1rem;
+  font-size: 1.4rem;
   color: #e7e7eb;
   margin-bottom: 4%;
   padding-left: 2.5%;
@@ -414,7 +418,10 @@ li {
   margin-right: 2%;
   padding-bottom: 1%;
 }
-
+label {
+  font-size: 1.4em;
+  margin-right: 2%;
+}
 .boxRadio {
   font-size: 1rem;
   color: #e7e7eb;
@@ -423,7 +430,7 @@ li {
 }
 
 #radioTitle {
-  font-size: 1.2rem;
+  font-size: 2rem;
   color: #c2128d;
   margin-bottom: 2%;
   font-family: "Outfit", sans-serif;
