@@ -48,7 +48,7 @@ moreInfoButton.addEventListener("click", (submitEvent) => {
     main.appendChild(div);
   } else if (glowingStars.length >= 7 && glowingStars.length < 9) {
     main.innerHTML = "";
-    h3.innerHTML = `<i class="far fa-smile-beam" style="color: #BFFF10"></i> <br> </> Thanks for the good rating! We'll make sure to follow your feedback to improve the quality of our services.`;
+    h3.innerHTML = `<i class="far fa-meh" style="color: #BFFF10"></i> <br> </> Thanks for the good rating! We'll make sure to follow your feedback to improve the quality of our services.`;
 
     div.appendChild(h3);
     main.appendChild(div);

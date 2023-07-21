@@ -273,7 +273,7 @@ main > div:nth-child(4) {
   height: 20em;
   margin-left: 6.8%;
   margin-top: 6.8%;
-  background-image: url(./assets/bg.jpg);
+  background-image: url(../assets/bg.jpg);
   background-size: 1250px;
   background-position: 749px;
 }
