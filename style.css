@@ -268,10 +268,11 @@ main > div:nth-child(4) {
 #chart {
   border: 1px solid transparent;
   border-radius: 50%;
+  box-shadow: inset 0px 0px 20px 5px #090d2c;
   width: 20em;
   height: 20em;
-  margin-left: 7.8%;
-  margin-top: 7%;
+  margin-left: 6.8%;
+  margin-top: 6.8%;
   background-image: url(./assets/bg.jpg);
   background-size: 1250px;
   background-position: 749px;

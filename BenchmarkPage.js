@@ -237,6 +237,7 @@ const displayAnswer = () => {
     lastClickedText.push("");
   }
   for (let i = 0; i < buttons.length; i++) {
+    buttons[i].type = "button";
     if (i === 2) {
       form.appendChild(br);
     }
@@ -305,7 +306,7 @@ const displayAnswer = () => {
         <h4>${correctH4.innerText}</h4>
         <h5>${correctH5.innerText}</h5>
         </div>
-        <div style="background-image: conic-gradient(#00ffff ${correctGradient}deg, #c2128d ${correctGradient}deg);">
+        <div style="background-image: conic-gradient(#00ffff ${correctGradient}deg, #c2128d ${correctGradient}deg); box-shadow: 0px 0px 20px 10px #090D2C;">
         <div id="chart">
         <p>${pText.innerHTML}</p>
         <p>${secondP.innerHTML}</p>
