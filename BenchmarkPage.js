@@ -220,6 +220,14 @@ const displayAnswer = () => {
   clearInterval(timerInterval);
   main.innerHTML = "";
   question.innerHTML = "";
+  footer.innerHTML = "";
+  const next = document.createElement("button");
+  next.id = "rateUs";
+  next.innerText = "Next question";
+  next.style.cursor = "pointer";
+  footer.appendChild(next);
+  numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
+  footer.appendChild(numberQuestion);
   const h1 = document.createElement("h1");
   h1.classList.add("title");
   h1.innerText = `${questions[questionNumber].question}`;
@@ -256,6 +264,8 @@ const displayAnswer = () => {
   question.appendChild(h1);
   question.appendChild(form);
   main.appendChild(question);
+  body.appendChild(main);
+  body.appendChild(footer);
   indici = [];
   indiciIncorrectAnswers = [];
   buttons = [];
@@ -422,11 +432,11 @@ const displayAnswer = () => {
       footer.appendChild(numberQuestion);
       body.appendChild(footer);
     }
-  }, 700);
+  }, 1000);
 };
 
 const firstQuestion = () => {
-  header.innerHTML = "";
+  body.innerHTML = "";
   header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
   <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
     <div class="timer">
@@ -439,8 +449,6 @@ const firstQuestion = () => {
     </div>
   </div>`;
   startTimer(timeLimit, timePassed);
-  main.innerHTML = "";
-  question.innerHTML = "";
   const h1 = document.createElement("h1");
   h1.classList.add("title");
   h1.innerText = `${questions[questionNumber].question}`;
@@ -497,4 +505,9 @@ const firstQuestion = () => {
   body.appendChild(main);
   body.appendChild(footer);
 };
-firstQuestion();
+
+function goToQuizPage(submitEvent) {
+  if (document.getElementById("square").checked === true) {
+    firstQuestion();
+  }
+}
