@@ -441,7 +441,7 @@ li strong {
 
 /* Stili relativi alla pagina feedback */
 #feedbackBody {
-  background-image: url(./assets/bg.jpg);
+  background-image: url(../assets/bg.jpg);
   background-size: cover;
   background-position: left;
   padding: 3% 28%;
