@@ -249,11 +249,6 @@ const allQuestions = [
 ];
 
 let questions = [];
-for (let i = 0; i < allQuestions.length; i++) {
-  if (allQuestions[i].difficulty === "easy") {
-    questions.push(allQuestions[i]);
-  }
-}
 
 const header = document.createElement("header");
 const body = document.getElementsByTagName("body")[0];
@@ -680,6 +675,11 @@ const firstQuestion = () => {
 
 function goToQuizPage(submitEvent) {
   if (document.getElementById("square").checked === true) {
+    for (let i = 0; i < allQuestions.length; i++) {
+      if (allQuestions[i].difficulty === "easy") {
+        questions.push(allQuestions[i]);
+      }
+    }
     firstQuestion();
   }
 }

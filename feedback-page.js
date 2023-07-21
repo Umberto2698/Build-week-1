@@ -24,3 +24,5 @@ Stars[0].onclick = () => {
     Stars[0].src = "./assets/starafterclick.svg";
   }
 };
+
+const moreInfoButton = document.getElementById("buttonMoreInfo");
