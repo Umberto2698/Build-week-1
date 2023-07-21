@@ -249,6 +249,37 @@ const allQuestions = [
 ];
 
 let questions = [];
+let timePassed = 0;
+let timeGradient = 0;
+
+const easy = document.getElementById("easy");
+const medium = document.getElementById("medium");
+const hard = document.getElementById("hard");
+
+function goToQuizPage(submitEvent) {
+  if (document.getElementById("square").checked === true) {
+    if (easy.checked === true) {
+      for (let i = 0; i < allQuestions.length; i++) {
+        if (allQuestions[i].difficulty === "easy") {
+          questions.push(allQuestions[i]);
+        }
+      }
+    } else if (medium.checked === true) {
+      for (let i = 0; i < allQuestions.length; i++) {
+        if (allQuestions[i].difficulty === "medium") {
+          questions.push(allQuestions[i]);
+        }
+      }
+    } else if (hard.checked === true) {
+      for (let i = 0; i < allQuestions.length; i++) {
+        if (allQuestions[i].difficulty === "hard") {
+          questions.push(allQuestions[i]);
+        }
+      }
+    }
+    firstQuestion();
+  }
+}
 
 const header = document.createElement("header");
 const body = document.getElementsByTagName("body")[0];
@@ -305,10 +336,6 @@ promotions / spam folder)`;
 }
 
 //Funzionalità del timer dinamico
-let timeLimit = 30;
-let timePassed = 0;
-let timeLeft = timeLimit;
-let timeGradient = 0;
 
 function onTimesUp() {
   displayAnswer();
@@ -386,6 +413,15 @@ let randomPositionTrueFalse = () => {
 };
 
 const displayAnswer = () => {
+  let timeLimit = 0;
+  if (easy.checked === true) {
+    timeLimit = 30;
+  } else if (medium.checked === true) {
+    timeLimit = 40;
+  } else if (hard.checked === true) {
+    timeLimit = 60;
+  }
+  let timeLeft = timeLimit;
   clearInterval(timerInterval);
   main.innerHTML = "";
   question.innerHTML = "";
@@ -603,6 +639,17 @@ const displayAnswer = () => {
 };
 
 const firstQuestion = () => {
+  let timeLimit = 0;
+  if (easy.checked === true) {
+    timeLimit = 30;
+    let timeLeft = timeLimit;
+  } else if (medium.checked === true) {
+    timeLimit = 40;
+    let timeLeft = timeLimit;
+  } else if (hard.checked === true) {
+    timeLimit = 60;
+    let timeLeft = timeLimit;
+  }
   body.innerHTML = "";
   header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
   <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
@@ -672,14 +719,3 @@ const firstQuestion = () => {
   body.appendChild(main);
   body.appendChild(footer);
 };
-
-function goToQuizPage(submitEvent) {
-  if (document.getElementById("square").checked === true) {
-    for (let i = 0; i < allQuestions.length; i++) {
-      if (allQuestions[i].difficulty === "easy") {
-        questions.push(allQuestions[i]);
-      }
-    }
-    firstQuestion();
-  }
-}
