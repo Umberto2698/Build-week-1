@@ -139,7 +139,7 @@ main {
 }
 #selectedButtonCorrect {
   background-color: #b7008a;
-  border: 3px solid #27c70a;
+  border: 3px solid #00ffff;
   box-shadow: 0px 0px 0px 0px #e7e7eb;
   border-radius: 50px;
   text-align: center;
@@ -153,7 +153,7 @@ main {
 }
 #selectedButtonIncorrect {
   background-color: #b7008a;
-  border: 3px solid #d70a0a;
+  border: 3px solid #9f0072;
   box-shadow: 0px 0px 0px 0px #e7e7eb;
   border-radius: 50px;
   text-align: center;
@@ -166,7 +166,7 @@ main {
   color: #e7e7eb;
 }
 #correctButton {
-  border: 3px solid #27c70a;
+  border: 3px solid #00ffff;
   box-shadow: 0px 0px 0px 0px #e7e7eb;
   border-radius: 50px;
   background-color: transparent;
@@ -181,7 +181,7 @@ main {
 }
 
 #incorrectButton {
-  border: 3px solid #d70a14;
+  border: 3px solid #9f0072;
   box-shadow: 0px 0px 0px 0px #e7e7eb;
   border-radius: 50px;
   background-color: transparent;
