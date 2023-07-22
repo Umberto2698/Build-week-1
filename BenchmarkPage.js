@@ -248,9 +248,10 @@ let timeGradient = 0;
 const easy = document.getElementById("easy");
 const medium = document.getElementById("medium");
 const hard = document.getElementById("hard");
+const chekbox = document.getElementById("square");
 
 function goToQuizPage(submitEvent) {
-  if (document.getElementById("square").checked === true) {
+  if (chekbox.checked === true) {
     if (easy.checked === true) {
       for (let i = 0; i < allQuestions.length; i++) {
         if (allQuestions[i].difficulty === "easy") {
@@ -295,25 +296,22 @@ const pText = document.createElement("p");
 const secondP = document.createElement("p");
 
 let questionNumber = 0;
-let correctQuestionsAnswer = [];
-let correctAnswer = 0;
-let incorrectAnswer = 0;
 
 let buttons = [];
 let lastClickedText = [];
 let last = "";
 
-function corrPercentage() {
+function corrPercentage(correctAnswer) {
   correctH4.innerText = `${(correctAnswer * 100) / questions.length}%`;
   correctH5.innerText = `${correctAnswer} / ${questions.length} questions`;
 }
 
-function incorrPercentage() {
+function incorrPercentage(correctAnswer, incorrectAnswer) {
   incorrectH4.innerText = `${100 - (correctAnswer * 100) / questions.length}%`;
   incorrectH5.innerText = `${incorrectAnswer} / ${questions.length} questions`;
 }
 
-function chartText() {
+function chartText(correctAnswer) {
   if (correctAnswer >= 5) {
     pText.innerHTML = `Congratulations! <br /><span>You passed the exam.</span>`;
     secondP.innerHTML = `We'll send you the certificate <br />
@@ -329,17 +327,12 @@ promotions / spam folder)`;
 }
 
 //Funzionalità del timer dinamico
-
-function onTimesUp() {
-  displayAnswer();
-}
-
 function startTimer(timeLimit, timePassed) {
   let timeLeft = timeLimit;
   timerInterval = setInterval(() => {
     if (timeLeft === 0) {
       clearInterval(timerInterval);
-      onTimesUp();
+      displayAnswer();
     } else {
       timePassed = timePassed += 1;
       timeLeft = timeLimit - timePassed;
@@ -364,6 +357,20 @@ function formatTime(time) {
   let seconds = time % 60;
   return `${seconds}`;
 }
+
+let indexRandomQuestions = [];
+let randomQuestions = () => {
+  for (let i = 0; i < 10; i++) {
+    let indice = parseInt(Math.floor(Math.random() * 10));
+    if (indexRandomQuestions.some((n) => n === indice)) {
+      i--;
+      continue;
+    } else {
+      indexRandomQuestions.push(indice);
+      return indice;
+    }
+  }
+};
 
 let indiciIncorrectAnswers = [];
 let randomIndex = () => {
@@ -428,7 +435,7 @@ const displayAnswer = () => {
   footer.appendChild(numberQuestion);
   const h1 = document.createElement("h1");
   h1.classList.add("title");
-  h1.innerText = `${questions[questionNumber].question}`;
+  h1.innerText = `${questions[indexRandomQuestions[questionNumber]].question}`;
   const form = document.createElement("form");
   form.id = "formAnswer";
   if (lastClickedText[questionNumber] === undefined) {
@@ -441,19 +448,19 @@ const displayAnswer = () => {
     }
     if (
       buttons[i].innerText === lastClickedText[questionNumber] &&
-      buttons[i].innerText === questions[questionNumber].correct_answer
+      buttons[i].innerText === questions[indexRandomQuestions[questionNumber]].correct_answer
     ) {
       buttons[i].id = "selectedButtonCorrect";
     } else if (
       (buttons[i].innerText === lastClickedText[questionNumber] &&
-        buttons[i].innerText === questions[questionNumber].incorrect_answers[0]) ||
+        buttons[i].innerText === questions[indexRandomQuestions[questionNumber]].incorrect_answers[0]) ||
       (buttons[i].innerText === lastClickedText[questionNumber] &&
-        buttons[i].innerText === questions[questionNumber].incorrect_answers[1]) ||
+        buttons[i].innerText === questions[indexRandomQuestions[questionNumber]].incorrect_answers[1]) ||
       (buttons[i].innerText === lastClickedText[questionNumber] &&
-        buttons[i].innerText === questions[questionNumber].incorrect_answers[2])
+        buttons[i].innerText === questions[indexRandomQuestions[questionNumber]].incorrect_answers[2])
     ) {
       buttons[i].id = "selectedButtonIncorrect";
-    } else if (buttons[i].innerText === questions[questionNumber].correct_answer) {
+    } else if (buttons[i].innerText === questions[indexRandomQuestions[questionNumber]].correct_answer) {
       buttons[i].id = "correctButton";
     } else {
       buttons[i].id = "incorrectButton";
@@ -469,32 +476,22 @@ const displayAnswer = () => {
   indiciIncorrectAnswers = [];
   buttons = [];
   const nextQuestion = setTimeout(function () {
-    header.innerHTML = "";
-    header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
-      <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
-      <div class="timer">
-      <p id="timerStamp">
-      second <br />
-      <span class="spanTimer">${timeLeft}</span>
-      <br />
-      remaning
-      </p>
-      </div>
-      </div>`;
-    startTimer(timeLimit, timePassed);
     questionNumber++;
     if (questionNumber === questions.length) {
+      clearInterval(setInterval);
+      let correctQuestionsAnswer = [];
+      let correctAnswer = 0;
       for (let i = 0; i < questions.length; i++) {
-        correctQuestionsAnswer.push(questions[i].correct_answer);
+        correctQuestionsAnswer.push(questions[indexRandomQuestions[i]].correct_answer);
         if (correctQuestionsAnswer[i] === lastClickedText[i]) {
           correctAnswer += 1;
         }
       }
-      incorrectAnswer = questions.length - correctAnswer;
+      let incorrectAnswer = questions.length - correctAnswer;
       let correctGradient = (correctAnswer * 360) / questions.length;
-      corrPercentage();
-      incorrPercentage();
-      chartText();
+      corrPercentage(correctAnswer);
+      incorrPercentage(correctAnswer, incorrectAnswer);
+      chartText(correctAnswer);
       body.innerHTML = `<div id="logoContainer"><img src="./assets/epicode_logo.png" alt="Logo EPICODE" class="logo" /></div>
         <main>
         <h1>Results</h1>
@@ -516,122 +513,151 @@ const displayAnswer = () => {
         <h5>${incorrectH5.innerText}</h5>
         </div>
         <footer>
+        <button id="rateUs" onclick="firstQuestion()">TRY AGAIN</button>
         <a href="feedback-page.html"><button id="rateUs">RATE US</button></a>
+        <button id="rateUs">RESULTS</button>
         </footer>
         </main>
         <script src="./BenchmarkPage.js"></script>`;
-    } else if (questions[questionNumber].type === "boolean") {
-      main.innerHTML = "";
-      question.innerHTML = "";
-      const h1 = document.createElement("h1");
-      h1.classList.add("title");
-      h1.innerText = `${questions[questionNumber].question}`;
-      const form = document.createElement("form");
-      form.id = "formAnswer";
-      form.addEventListener("click", (clicco) => {
-        clicco.preventDefault();
-        for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
-          if (clicco.currentTarget.childNodes[i].type !== undefined) {
-            clicco.currentTarget.childNodes[i].id = "answerButton";
-          }
-        }
-        if (clicco.target.tagName === "BUTTON") {
-          clicco.target.id = "selectedButton";
-          let last = clicco.target.innerText;
-          lastClickedText.splice(questionNumber, 1, last);
-        }
-      });
-      let index = 0;
-      for (let i = 0; i < 2; i++) {
-        const button = document.createElement("button");
-        button.id = "answerButton";
-        button.style.type = "submit";
-        button.style.cursor = "pointer";
-        buttons.push(button);
-        randomPositionTrueFalse();
-      }
-      buttons[indici[0]].innerText = `${questions[questionNumber].incorrect_answers[index]}`;
-      for (let i = 0; i < buttons.length; i++) {
-        if (buttons[i].innerText === "") {
-          buttons[i].innerText = `${questions[questionNumber].correct_answer}`;
-        }
-      }
-      form.appendChild(buttons[0]);
-      form.appendChild(buttons[1]);
-      question.appendChild(h1);
-      question.appendChild(form);
-      main.appendChild(question);
-      const next = document.createElement("button");
-      next.id = "rateUs";
-      next.innerText = "Next question";
-      next.style.cursor = "pointer";
-      next.onclick = displayAnswer;
-      footer.innerHTML = "";
-      footer.appendChild(next);
-      numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
-      footer.appendChild(numberQuestion);
-      body.appendChild(footer);
     } else {
-      main.innerHTML = "";
-      question.innerHTML = "";
-      const h1 = document.createElement("h1");
-      h1.classList.add("title");
-      h1.innerText = `${questions[questionNumber].question}`;
-      const form = document.createElement("form");
-      form.id = "formAnswer";
-      form.addEventListener("click", (clicco) => {
-        clicco.preventDefault();
-        for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
-          if (clicco.currentTarget.childNodes[i].type !== undefined) {
-            clicco.currentTarget.childNodes[i].id = "answerButton";
+      header.innerHTML = "";
+      header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
+      <div id="timerContainer" style="background : conic-gradient(#00ffff ${360}deg, #98699c ${360}deg);">
+      <div class="timer">
+      <p id="timerStamp">
+      second <br />
+      <span class="spanTimer">${timeLeft}</span>
+      <br />
+      remaning
+      </p>
+      </div>
+      </div>`;
+      startTimer(timeLimit, timePassed);
+      let position = randomQuestions();
+      console.log(indexRandomQuestions);
+      if (questions[position].type === "boolean") {
+        main.innerHTML = "";
+        question.innerHTML = "";
+        const h1 = document.createElement("h1");
+        h1.classList.add("title");
+        h1.innerText = `${questions[position].question}`;
+        const form = document.createElement("form");
+        form.id = "formAnswer";
+        form.addEventListener("click", (clicco) => {
+          clicco.preventDefault();
+          for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
+            if (clicco.currentTarget.childNodes[i].type !== undefined) {
+              clicco.currentTarget.childNodes[i].id = "answerButton";
+            }
+          }
+          if (clicco.target.tagName === "BUTTON") {
+            clicco.target.id = "selectedButton";
+            let last = clicco.target.innerText;
+            lastClickedText.splice(questionNumber, 1, last);
+          } else if (clicco.target.tagName === "FORM") {
+            lastClickedText.splice(questionNumber, 1, "");
+          }
+        });
+        let index = 0;
+        for (let i = 0; i < 2; i++) {
+          const button = document.createElement("button");
+          button.id = "answerButton";
+          button.style.type = "submit";
+          button.style.cursor = "pointer";
+          buttons.push(button);
+          randomPositionTrueFalse();
+        }
+        buttons[indici[0]].innerText = `${questions[position].incorrect_answers[index]}`;
+        for (let i = 0; i < buttons.length; i++) {
+          if (buttons[i].innerText === "") {
+            buttons[i].innerText = `${questions[position].correct_answer}`;
           }
         }
-        if (clicco.target.tagName === "BUTTON") {
-          clicco.target.id = "selectedButton";
-          let last = clicco.target.innerText;
-          lastClickedText.splice(questionNumber, 1, last);
+        form.appendChild(buttons[0]);
+        form.appendChild(buttons[1]);
+        question.appendChild(h1);
+        question.appendChild(form);
+        main.appendChild(question);
+        const next = document.createElement("button");
+        next.id = "rateUs";
+        next.innerText = "Next question";
+        next.style.cursor = "pointer";
+        next.onclick = displayAnswer;
+        footer.innerHTML = "";
+        footer.appendChild(next);
+        numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
+        footer.appendChild(numberQuestion);
+        body.appendChild(footer);
+      } else {
+        main.innerHTML = "";
+        question.innerHTML = "";
+        const h1 = document.createElement("h1");
+        h1.classList.add("title");
+        h1.innerText = `${questions[position].question}`;
+        const form = document.createElement("form");
+        form.id = "formAnswer";
+        form.addEventListener("click", (clicco) => {
+          clicco.preventDefault();
+          for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
+            if (clicco.currentTarget.childNodes[i].type !== undefined) {
+              clicco.currentTarget.childNodes[i].id = "answerButton";
+            }
+          }
+          if (clicco.target.tagName === "BUTTON") {
+            clicco.target.id = "selectedButton";
+            let last = clicco.target.innerText;
+            lastClickedText.splice(questionNumber, 1, last);
+          } else if (clicco.target.tagName === "FORM") {
+            lastClickedText.splice(questionNumber, 1, "");
+          }
+        });
+        for (let i = 0; i < 4; i++) {
+          const button = document.createElement("button");
+          button.id = "answerButton";
+          button.style.type = "submit";
+          button.style.cursor = "pointer";
+          buttons.push(button);
+          randomPosition();
         }
-      });
-      for (let i = 0; i < 4; i++) {
-        const button = document.createElement("button");
-        button.id = "answerButton";
-        button.style.type = "submit";
-        button.style.cursor = "pointer";
-        buttons.push(button);
-        randomPosition();
-      }
-      for (let i = 0; i < 3; i++) {
-        let index = randomIndex();
-        buttons[indici[i]].innerText = `${questions[questionNumber].incorrect_answers[index]}`;
-      }
-      for (let i = 0; i < buttons.length; i++) {
-        if (buttons[i].innerText === "") {
-          buttons[i].innerText = `${questions[questionNumber].correct_answer}`;
+        for (let i = 0; i < 3; i++) {
+          let index = randomIndex();
+          buttons[indici[i]].innerText = `${questions[position].incorrect_answers[index]}`;
         }
+        for (let i = 0; i < buttons.length; i++) {
+          if (buttons[i].innerText === "") {
+            buttons[i].innerText = `${questions[position].correct_answer}`;
+          }
+        }
+        form.appendChild(buttons[0]);
+        form.appendChild(buttons[1]);
+        form.appendChild(br);
+        form.appendChild(buttons[2]);
+        form.appendChild(buttons[3]);
+        question.appendChild(h1);
+        question.appendChild(form);
+        main.appendChild(question);
+        const next = document.createElement("button");
+        next.id = "rateUs";
+        next.innerText = "Next question";
+        next.style.cursor = "pointer";
+        next.onclick = displayAnswer;
+        footer.innerHTML = "";
+        footer.appendChild(next);
+        numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
+        footer.appendChild(numberQuestion);
+        body.appendChild(footer);
       }
-      form.appendChild(buttons[0]);
-      form.appendChild(buttons[1]);
-      form.appendChild(br);
-      form.appendChild(buttons[2]);
-      form.appendChild(buttons[3]);
-      question.appendChild(h1);
-      question.appendChild(form);
-      main.appendChild(question);
-      const next = document.createElement("button");
-      next.id = "rateUs";
-      next.innerText = "Next question";
-      next.style.cursor = "pointer";
-      next.onclick = displayAnswer;
-      footer.innerHTML = "";
-      footer.appendChild(next);
-      numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
-      footer.appendChild(numberQuestion);
-      body.appendChild(footer);
     }
   }, 1000);
 };
 
 const firstQuestion = () => {
+  indexRandomQuestions = [];
+  indici = [];
+  indiciIncorrectAnswers = [];
+  buttons = [];
+  questionNumber = 0;
+  let position = randomQuestions();
   let timeLimit = 0;
   if (easy.checked === true) {
     timeLimit = 30;
@@ -656,59 +682,119 @@ const firstQuestion = () => {
     </div>
   </div>`;
   startTimer(timeLimit, timePassed);
-  const h1 = document.createElement("h1");
-  h1.classList.add("title");
-  h1.innerText = `${questions[questionNumber].question}`;
-  const form = document.createElement("form");
-  form.id = "formAnswer";
-  form.addEventListener("click", (clicco) => {
-    clicco.preventDefault();
-    for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
-      if (clicco.currentTarget.childNodes[i].type !== undefined) {
-        clicco.currentTarget.childNodes[i].id = "answerButton";
+  if (questions[position].type === "multiple") {
+    const h1 = document.createElement("h1");
+    h1.classList.add("title");
+    h1.innerText = `${questions[position].question}`;
+    const form = document.createElement("form");
+    form.id = "formAnswer";
+    form.addEventListener("click", (clicco) => {
+      clicco.preventDefault();
+      for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
+        if (clicco.currentTarget.childNodes[i].type !== undefined) {
+          clicco.currentTarget.childNodes[i].id = "answerButton";
+        }
+      }
+      if (clicco.target.tagName === "BUTTON") {
+        clicco.target.id = "selectedButton";
+        let last = clicco.target.innerText;
+        lastClickedText.splice(questionNumber, 1, last);
+      } else if (clicco.target.tagName === "FORM") {
+        lastClickedText.splice(questionNumber, 1, "");
+      }
+    });
+    for (let i = 0; i < 4; i++) {
+      const button = document.createElement("button");
+      button.id = "answerButton";
+      button.style.type = "submit";
+      button.style.cursor = "pointer";
+      buttons.push(button);
+      randomPosition();
+    }
+    for (let i = 0; i < 3; i++) {
+      let index = randomIndex();
+      buttons[indici[i]].innerText = `${questions[position].incorrect_answers[index]}`;
+    }
+    for (let i = 0; i < buttons.length; i++) {
+      if (buttons[i].innerText === "") {
+        buttons[i].innerText = `${questions[position].correct_answer}`;
       }
     }
-    if (clicco.target.tagName === "BUTTON") {
-      clicco.target.id = "selectedButton";
-      let last = clicco.target.innerText;
-      lastClickedText.splice(questionNumber, 1, last);
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    form.appendChild(br);
+    form.appendChild(buttons[2]);
+    form.appendChild(buttons[3]);
+    question.innerHTML = "";
+    question.appendChild(h1);
+    question.appendChild(form);
+    main.appendChild(question);
+    const next = document.createElement("button");
+    next.id = "rateUs";
+    next.innerText = "Next question";
+    next.style.cursor = "pointer";
+    next.onclick = displayAnswer;
+    footer.innerHTML = "";
+    footer.appendChild(next);
+    numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
+    footer.appendChild(numberQuestion);
+    body.appendChild(header);
+    body.appendChild(main);
+    body.appendChild(footer);
+  } else {
+    const h1 = document.createElement("h1");
+    h1.classList.add("title");
+    h1.innerText = `${questions[position].question}`;
+    const form = document.createElement("form");
+    form.id = "formAnswer";
+    form.addEventListener("click", (clicco) => {
+      clicco.preventDefault();
+      for (let i = 0; i < clicco.currentTarget.childNodes.length; i++) {
+        if (clicco.currentTarget.childNodes[i].type !== undefined) {
+          clicco.currentTarget.childNodes[i].id = "answerButton";
+        }
+      }
+      if (clicco.target.tagName === "BUTTON") {
+        clicco.target.id = "selectedButton";
+        let last = clicco.target.innerText;
+        lastClickedText.splice(questionNumber, 1, last);
+      } else if (clicco.target.tagName === "FORM") {
+        lastClickedText.splice(questionNumber, 1, "");
+      }
+    });
+    let index = 0;
+    for (let i = 0; i < 2; i++) {
+      const button = document.createElement("button");
+      button.id = "answerButton";
+      button.style.type = "submit";
+      button.style.cursor = "pointer";
+      buttons.push(button);
+      randomPositionTrueFalse();
     }
-  });
-  for (let i = 0; i < 4; i++) {
-    const button = document.createElement("button");
-    button.id = "answerButton";
-    button.style.type = "submit";
-    button.style.cursor = "pointer";
-    buttons.push(button);
-    randomPosition();
-  }
-  for (let i = 0; i < 3; i++) {
-    let index = randomIndex();
-    buttons[indici[i]].innerText = `${questions[questionNumber].incorrect_answers[index]}`;
-  }
-  for (let i = 0; i < buttons.length; i++) {
-    if (buttons[i].innerText === "") {
-      buttons[i].innerText = `${questions[questionNumber].correct_answer}`;
+    buttons[indici[0]].innerText = `${questions[position].incorrect_answers[index]}`;
+    for (let i = 0; i < buttons.length; i++) {
+      if (buttons[i].innerText === "") {
+        buttons[i].innerText = `${questions[position].correct_answer}`;
+      }
     }
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    form.appendChild(br);
+    question.innerHTML = "";
+    question.appendChild(h1);
+    question.appendChild(form);
+    main.appendChild(question);
+    const next = document.createElement("button");
+    next.id = "rateUs";
+    next.innerText = "Next question";
+    next.style.cursor = "pointer";
+    next.onclick = displayAnswer;
+    footer.innerHTML = "";
+    footer.appendChild(next);
+    numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
+    footer.appendChild(numberQuestion);
+    body.appendChild(header);
+    body.appendChild(main);
+    body.appendChild(footer);
   }
-  form.appendChild(buttons[0]);
-  form.appendChild(buttons[1]);
-  form.appendChild(br);
-  form.appendChild(buttons[2]);
-  form.appendChild(buttons[3]);
-  question.appendChild(h1);
-  question.appendChild(form);
-  main.appendChild(question);
-  const next = document.createElement("button");
-  next.id = "rateUs";
-  next.innerText = "Next question";
-  next.style.cursor = "pointer";
-  next.onclick = displayAnswer;
-  footer.innerHTML = "";
-  footer.appendChild(next);
-  numberQuestion.innerHTML = `QUESTION ${questionNumber + 1} <span> / 10</span>`;
-  footer.appendChild(numberQuestion);
-  body.appendChild(header);
-  body.appendChild(main);
-  body.appendChild(footer);
 };

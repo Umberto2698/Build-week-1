@@ -318,6 +318,7 @@ footer {
   height: 4rem;
   border: 2px solid white;
   box-shadow: 0px 0px 20px 4px #372f7f;
+  margin-inline: 5%;
   cursor: pointer;
 }
 
