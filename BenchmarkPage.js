@@ -166,7 +166,10 @@ let randomPositionTrueFalse = () => {
 let questionNumber = 0;
 
 let buttons = [];
+let buttonsMultiple = [];
+let buttonsBoolean = [];
 let lastClickedText = [];
+let verify = [];
 
 const displayAnswer = () => {
   let timeLimit = 0;
@@ -241,6 +244,9 @@ const displayAnswer = () => {
         correctQuestionsAnswer.push(questions[indexRandomQuestions[i]].correct_answer);
         if (correctQuestionsAnswer[i] === lastClickedText[i]) {
           correctAnswer += 1;
+          verify.push(true);
+        } else {
+          verify.push(false);
         }
       }
       let incorrectAnswer = 10 - correctAnswer;
@@ -271,7 +277,7 @@ const displayAnswer = () => {
         <footer>
         <button id="rateUs" onclick="firstQuestion()">TRY AGAIN</button>
         <a href="feedback-page.html"><button id="rateUs">RATE US</button></a>
-        <button id="rateUs">RESULTS</button>
+        <button id="rateUs" onclick="quizResult()">RESULTS</button>
         </footer>
         </main>
         <script src="./BenchmarkPage.js"></script>`;
@@ -328,6 +334,9 @@ const displayAnswer = () => {
             buttons[i].innerText = `${questions[position].correct_answer}`;
           }
         }
+        for (let i = 0; i < 2; i++) {
+          buttonsBoolean.push(buttons[i]);
+        }
         form.appendChild(buttons[0]);
         form.appendChild(buttons[1]);
         question.appendChild(h1);
@@ -382,6 +391,9 @@ const displayAnswer = () => {
           if (buttons[i].innerText === "") {
             buttons[i].innerText = `${questions[position].correct_answer}`;
           }
+        }
+        for (let i = 0; i < 4; i++) {
+          buttonsMultiple.push(buttons[i]);
         }
         form.appendChild(buttons[0]);
         form.appendChild(buttons[1]);
@@ -475,6 +487,9 @@ const firstQuestion = () => {
         buttons[i].innerText = `${questions[position].correct_answer}`;
       }
     }
+    for (let i = 0; i < 4; i++) {
+      buttonsMultiple.push(buttons[i]);
+    }
     form.appendChild(buttons[0]);
     form.appendChild(buttons[1]);
     form.appendChild(br);
@@ -532,6 +547,9 @@ const firstQuestion = () => {
         buttons[i].innerText = `${questions[position].correct_answer}`;
       }
     }
+    for (let i = 0; i < 2; i++) {
+      buttonsBoolean.push(buttons[i]);
+    }
     form.appendChild(buttons[0]);
     form.appendChild(buttons[1]);
     form.appendChild(br);
@@ -551,5 +569,60 @@ const firstQuestion = () => {
     body.appendChild(header);
     body.appendChild(main);
     body.appendChild(footer);
+  }
+};
+
+const quizResult = () => {
+  body.innerHTML = `<div id="logoContainer"><img src="./assets/epicode_logo.png" alt="Logo EPICODE" class="logo" /></div>`;
+  for (let i = 0; i < 10; i++) {
+    const titleQuestion = document.createElement("p");
+    titleQuestion.classList.add("recupParagraph");
+    const ulContainer = document.createElement("div");
+    const ul = document.createElement("ul");
+    if (verify[i]) {
+      titleQuestion.innerHTML = `<i class="fas fa-circle" style="color: #00FFFF; cursor: pointer"></i>${
+        questions[indexRandomQuestions[i]].question
+      }`;
+      if (questions[indexRandomQuestions[i]].type === "multiple") {
+        for (let j = 0; j < 4; j++) {
+          const answer = document.createElement("li");
+          answer.innerText = `${buttonsMultiple[0].innerText}`;
+          buttonsMultiple = buttonsMultiple.splice(1, buttonsMultiple.length);
+          ul.appendChild(answer);
+        }
+      } else {
+        for (let j = 0; j < 2; j++) {
+          const answer = document.createElement("li");
+          answer.innerText = `${buttonsBoolean[0].innerText}`;
+          buttonsBoolean = buttonsBoolean.splice(1, buttonsBoolean.length);
+          ul.appendChild(answer);
+        }
+      }
+      ulContainer.appendChild(ul);
+      titleQuestion.appendChild(ulContainer);
+      body.appendChild(titleQuestion);
+    } else {
+      titleQuestion.innerHTML = `<i class="fas fa-circle" style="color: #C0008E; cursor: pointer"></i>${
+        questions[indexRandomQuestions[i]].question
+      }`;
+      if (questions[indexRandomQuestions[i]].type === "multiple") {
+        for (let j = 0; j < 4; j++) {
+          const answer = document.createElement("li");
+          answer.innerText = `${buttonsMultiple[0].innerText}`;
+          buttonsMultiple = buttonsMultiple.splice(1, buttonsMultiple.length);
+          ul.appendChild(answer);
+        }
+      } else {
+        for (let j = 0; j < 2; j++) {
+          const answer = document.createElement("li");
+          answer.innerText = `${buttonsBoolean[0].innerText}`;
+          buttonsBoolean = buttonsBoolean.splice(1, buttonsBoolean.length);
+          ul.appendChild(answer);
+        }
+      }
+      ulContainer.appendChild(ul);
+      titleQuestion.appendChild(ulContainer);
+      body.appendChild(titleQuestion);
+    }
   }
 };

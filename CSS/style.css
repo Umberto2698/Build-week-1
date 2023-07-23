@@ -522,3 +522,21 @@ i {
   margin-inline: 1.1%;
   margin-bottom: 5%;
 }
+
+/*Stile pagina recup*/
+.recupParagraph {
+  font-size: 1.4rem;
+  color: #e7e7eb;
+  margin-top: 3%;
+  margin-left: 23.5%;
+}
+
+.recupParagraph > i {
+  margin-inline: 2%;
+  margin-bottom: 0;
+}
+.recupParagraph > div > ul {
+  margin-top: 2%;
+  padding-left: 7.5%;
+  display: none;
+}
