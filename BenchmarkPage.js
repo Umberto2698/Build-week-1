@@ -170,6 +170,7 @@ let buttonsMultiple = [];
 let buttonsBoolean = [];
 let lastClickedText = [];
 let verify = [];
+let correctQuestionsAnswer = [];
 
 const displayAnswer = () => {
   let timeLimit = 0;
@@ -238,7 +239,6 @@ const displayAnswer = () => {
     questionNumber++;
     if (questionNumber === 10) {
       clearInterval(setInterval);
-      let correctQuestionsAnswer = [];
       let correctAnswer = 0;
       for (let i = 0; i < 10; i++) {
         correctQuestionsAnswer.push(questions[indexRandomQuestions[i]].correct_answer);
@@ -419,6 +419,9 @@ const displayAnswer = () => {
 };
 
 const firstQuestion = () => {
+  lastClickedText = [];
+  correctQuestionsAnswer = [];
+  verify = [];
   indexRandomQuestions = [];
   indici = [];
   indiciIncorrectAnswers = [];
@@ -574,26 +577,59 @@ const firstQuestion = () => {
 
 const quizResult = () => {
   body.innerHTML = `<div id="logoContainer"><img src="./assets/epicode_logo.png" alt="Logo EPICODE" class="logo" /></div>`;
+  let n = 0;
+  let counter = 0;
   for (let i = 0; i < 10; i++) {
     const titleQuestion = document.createElement("p");
     titleQuestion.classList.add("recupParagraph");
+    const span = document.createElement("span");
+    span.style = "cursor: pointer";
     const ulContainer = document.createElement("div");
     const ul = document.createElement("ul");
+    ul.classList.add("recupParagraphUl");
+    span.onclick = () => {
+      if (n === 0) {
+        ul.classList.remove("recupParagraphUl");
+        ul.classList.add("display");
+        n = n + 1;
+      } else if (n === 1) {
+        ul.classList.remove("display");
+        ul.classList.add("recupParagraphUl");
+        n = n - 1;
+      }
+    };
+    //da vedere meglio
     if (verify[i]) {
-      titleQuestion.innerHTML = `<i class="fas fa-circle" style="color: #00FFFF; cursor: pointer"></i>${
-        questions[indexRandomQuestions[i]].question
-      }`;
+      span.innerText = `${questions[indexRandomQuestions[i]].question}`;
+      titleQuestion.innerHTML = `<i class="fas fa-circle" style="color: #00FFFF;"></i>`;
+      titleQuestion.appendChild(span);
       if (questions[indexRandomQuestions[i]].type === "multiple") {
         for (let j = 0; j < 4; j++) {
+          const text = document.createElement("span");
+          if (buttonsMultiple[0].innerText === correctQuestionsAnswer[counter]) {
+            text.innerHTML = `${buttonsMultiple[0].innerText} <i class="fas fa-check" style="color: #00FFFF; margin-bottom:0;"></i>`;
+            text.style = "backgroumd=color: #b7008a";
+            counter++;
+          } else {
+            text.innerHTML = `${buttonsMultiple[0].innerText} <i class="fas fa-times" style="color: #C0008E; margin-bottom:0;"></i>`;
+          }
           const answer = document.createElement("li");
-          answer.innerText = `${buttonsMultiple[0].innerText}`;
+          answer.appendChild(text);
           buttonsMultiple = buttonsMultiple.splice(1, buttonsMultiple.length);
           ul.appendChild(answer);
         }
       } else {
         for (let j = 0; j < 2; j++) {
+          const text = document.createElement("span");
+          if (buttonsBoolean[0].innerText === correctQuestionsAnswer[counter]) {
+            text.innerHTML = `${buttonsBoolean[0].innerText} <i class="fas fa-check" style="color: #00FFFF; margin-bottom:0;"></i>`;
+            text.style = "background-color: #b7008a";
+            counter++;
+          } else {
+            text.innerHTML = `${buttonsBoolean[0].innerText} <i class="fas fa-times" style="color: #C0008E; margin-bottom:0;"></i>`;
+          }
           const answer = document.createElement("li");
-          answer.innerText = `${buttonsBoolean[0].innerText}`;
+          answer.appendChild(text);
           buttonsBoolean = buttonsBoolean.splice(1, buttonsBoolean.length);
           ul.appendChild(answer);
         }
@@ -602,20 +638,50 @@ const quizResult = () => {
       titleQuestion.appendChild(ulContainer);
       body.appendChild(titleQuestion);
     } else {
-      titleQuestion.innerHTML = `<i class="fas fa-circle" style="color: #C0008E; cursor: pointer"></i>${
-        questions[indexRandomQuestions[i]].question
-      }`;
+      span.innerText = `${questions[indexRandomQuestions[i]].question}`;
+      titleQuestion.innerHTML = `<i class="fas fa-circle" style="color: #C0008E;"></i>`;
+      titleQuestion.appendChild(span);
       if (questions[indexRandomQuestions[i]].type === "multiple") {
         for (let j = 0; j < 4; j++) {
+          const text = document.createElement("span");
+          if (
+            (buttonsMultiple[0].innerText === lastClickedText[i] &&
+              buttonsMultiple[0].innerText === questions[indexRandomQuestions[i]].incorrect_answers[0]) ||
+            (buttonsMultiple[0].innerText === lastClickedText[i] &&
+              buttonsMultiple[0].innerText === questions[indexRandomQuestions[i]].incorrect_answers[1]) ||
+            (buttonsMultiple[0].innerText === lastClickedText[i] &&
+              buttonsMultiple[0].innerText === questions[indexRandomQuestions[i]].incorrect_answers[2])
+          ) {
+            text.innerHTML = `${buttonsMultiple[0].innerText} <i class="fas fa-times" style="color: #C0008E; margin-bottom:0;"></i>`;
+            text.style = "background-color: #b7008a";
+          } else if (buttonsMultiple[0].innerText === correctQuestionsAnswer[counter]) {
+            text.innerHTML = `${buttonsMultiple[0].innerText} <i class="fas fa-check" style="color: #00FFFF; margin-bottom:0;"></i>`;
+            counter++;
+          } else {
+            text.innerHTML = `${buttonsMultiple[0].innerText} <i class="fas fa-times" style="color: #C0008E; margin-bottom:0;"></i>`;
+          }
           const answer = document.createElement("li");
-          answer.innerText = `${buttonsMultiple[0].innerText}`;
+          answer.appendChild(text);
           buttonsMultiple = buttonsMultiple.splice(1, buttonsMultiple.length);
           ul.appendChild(answer);
         }
       } else {
         for (let j = 0; j < 2; j++) {
+          const text = document.createElement("span");
+          if (
+            (buttonsBoolean[0].innerText === lastClickedText[i] &&
+              buttonsBoolean[0].innerText === questions[indexRandomQuestions[i]].incorrect_answers[0]) ||
+            (buttonsBoolean[0].innerText === lastClickedText[i] &&
+              buttonsBoolean[0].innerText === questions[indexRandomQuestions[i]].incorrect_answers[1])
+          ) {
+            text.innerHTML = `${buttonsBoolean[0].innerText} <i class="fas fa-times" style="color: #C0008E; margin-bottom:0;"></i>`;
+            text.style = "background-color: #b7008a";
+          } else {
+            text.innerHTML = `${buttonsBoolean[0].innerText} <i class="fas fa-check" style="color: #00FFFF; margin-bottom:0;"></i>`;
+            counter++;
+          }
           const answer = document.createElement("li");
-          answer.innerText = `${buttonsBoolean[0].innerText}`;
+          answer.appendChild(text);
           buttonsBoolean = buttonsBoolean.splice(1, buttonsBoolean.length);
           ul.appendChild(answer);
         }
