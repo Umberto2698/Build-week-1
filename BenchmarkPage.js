@@ -32,13 +32,12 @@ function goToQuizPage(submitEvent) {
   }
 }
 
-const header = document.createElement("header");
 const body = document.getElementsByTagName("body")[0];
+const header = document.createElement("header");
 const main = document.createElement("main");
 const question = document.createElement("div");
 question.classList.add("normal");
 const br = document.createElement("br");
-
 const footer = document.createElement("footer");
 const numberQuestion = document.createElement("p");
 numberQuestion.classList.add("footerParagraph");
@@ -51,12 +50,6 @@ const incorrectH5 = document.createElement("h5");
 
 const pText = document.createElement("p");
 const secondP = document.createElement("p");
-
-let questionNumber = 0;
-
-let buttons = [];
-let lastClickedText = [];
-let last = "";
 
 function corrPercentage(correctAnswer) {
   correctH4.innerText = `${(correctAnswer * 100) / 10}%`;
@@ -72,14 +65,14 @@ function chartText(correctAnswer) {
   if (correctAnswer >= 5) {
     pText.innerHTML = `Congratulations! <br /><span>You passed the exam.</span>`;
     secondP.innerHTML = `We'll send you the certificate <br />
-in few minutes. <br />
-Check your email (including <br />
-promotions / spam folder)`;
+    in few minutes. <br />
+    Check your email (including <br />
+    promotions / spam folder)`;
   } else {
     pText.innerHTML = `Sorry! <br /><span>You failed the exam.</span>`;
     secondP.innerHTML = `This time it went wrong. <br />
-  We will notify you <br />
-  when you can try again`;
+    We will notify you <br />
+    when you can try again`;
   }
 }
 
@@ -97,14 +90,14 @@ function startTimer(timeLimit, timePassed) {
       header.innerHTML = "";
       header.innerHTML = `<img id="benchmarkLogo" src="assets/epicode_logo.png" alt="Logo epicode" />
       <div id="timerContainer" style="background : conic-gradient(#00ffff ${timeGradient}deg, #98699c ${timeGradient}deg);">
-        <div class="timer">
-          <p id="timerStamp">
-            second <br />
-            <span class="spanTimer">${timeLeft}</span>
-            <br />
-            remaning
-          </p>
-        </div>
+      <div class="timer">
+      <p id="timerStamp">
+      second <br />
+      <span class="spanTimer">${timeLeft}</span>
+      <br />
+      remaning
+      </p>
+      </div>
       </div>`;
     }
   }, 1000);
@@ -115,6 +108,7 @@ function formatTime(time) {
   return `${seconds}`;
 }
 
+//Funzionalità randomiche del quiz
 let indexRandomQuestions = [];
 let randomQuestions = () => {
   for (let i = 0; i < 10; i++) {
@@ -168,6 +162,11 @@ let randomPositionTrueFalse = () => {
     }
   }
 };
+
+let questionNumber = 0;
+
+let buttons = [];
+let lastClickedText = [];
 
 const displayAnswer = () => {
   let timeLimit = 0;
