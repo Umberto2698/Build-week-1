@@ -415,7 +415,7 @@ const displayAnswer = () => {
         body.appendChild(footer);
       }
     }
-  }, 500);
+  }, 1500);
 };
 
 const firstQuestion = () => {
