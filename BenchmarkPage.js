@@ -415,7 +415,7 @@ const displayAnswer = () => {
         body.appendChild(footer);
       }
     }
-  }, 1500);
+  }, 1250);
 };
 
 const firstQuestion = () => {
@@ -582,10 +582,8 @@ const quizResult = () => {
   body.innerHTML = `<div id="logoContainer"><img src="./assets/epicode_logo.png" alt="Logo EPICODE" class="logo" /></div>`;
   let n = 0;
   let counter = 0;
-  let buttonsMultipleCopy = buttonsMultiple;
-  let buttonsBooleanCopy = buttonsBoolean;
-  console.log(buttonsBoolean);
-  console.log(buttonsMultiple);
+  let buttonsMultipleCopy = buttonsMultiple.slice(0, buttonsMultiple.length);
+  let buttonsBooleanCopy = buttonsBoolean.slice(0, buttonsBoolean.length);
   for (let i = 0; i < 10; i++) {
     const titleQuestion = document.createElement("p");
     titleQuestion.classList.add("recupParagraph");
@@ -737,8 +735,6 @@ const quizResult = () => {
   const footer = document.createElement("footer");
   footer.innerHTML = `<button id="rateUs" onclick="resultPage()">GO BACK</button>`;
   body.appendChild(footer);
-  console.log(buttonsBoolean);
-  console.log(buttonsMultiple);
 };
 
 const resultPage = () => {
@@ -766,6 +762,7 @@ const resultPage = () => {
         <footer>
         <button id="rateUs" onclick="firstQuestion()">TRY AGAIN</button>
         <a href="feedback-page.html"><button id="rateUs">RATE US</button></a>
+        <button id="rateUs" onclick="quizResult()">RESULTS</button>
         </footer>
         </main>
         <script src="./BenchmarkPage.js"></script>`;
